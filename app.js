@@ -1,10 +1,8 @@
 var express = require('express');
 var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 var azure = require('azure');
 var fs = require('fs');
+var url = require('url');
 var storage_account = 'gallerie';
 var gallerieKey = 'SiQVY98VhO+NI1m6jfBMgB1M/00geM/puCgpMpRvsBSUz0H/xcgF77Wx9SiD7buJFvXZ9NTvyRNvf200CNT6Kg==';
 var package_container = 'packages';
@@ -12,10 +10,6 @@ var index_container = 'descriptifs';
 var admzip = require('adm-zip');
 var blobService = azure.createBlobService(storage_account,gallerieKey);
 var packages_folder = __dirname + '/databases/packages/';
-var url = require('url');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
