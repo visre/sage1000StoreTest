@@ -1,0 +1,17 @@
+{
+  "name": "sage1000store",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+	"azure": "~0.9.15",
+	"angular": "~1.2.23",
+	"adm-zip": "~0.4.4",
+    "express": "~4.8.6",
+	"ejs": "~1.0.0",
+	"html": "~0.0.7",
+    "debug": "~1.0.4",
+  }
+}
