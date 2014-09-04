@@ -78,7 +78,7 @@
 			</div>
 			
 			
-			<div class="row" ng-show="containerCtrl.isSelected(0)">				
+			<div class="row" ng-show="containerCtrl.isSelected(0)">		
 				<div class="col-sm-4 col-md-3" ng-repeat="item in itemCtrl.items">
 					<div class="thumbnail">
 						<a href="/#{{item.name}}" ng-click="itemCtrl.getItem(item.name); containerCtrl.selectTab(1); carouselCtrl.initCarousel()">
@@ -106,40 +106,15 @@
 						<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?{{item.link}}">install this item</a>
 					</p>
 				</div>
-
-				<div class="bs-example">
-					<div id='myCarousel' class='carousel slide'>
-						<!-- Carousel items -->
-						<div class="carousel-inner">
-							<div class="active item">
-								<h2>Slide 1</h2>
-								<div class="carousel-caption">
-								  <h3>First slide label</h3>
-								  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-								</div>
-							</div>
-							
-							<div class="item" ng-repeat="item in carouselCtrl.items">
-							    <div align='center'>
-									<a href="/#{{item.name}}" ng-click="itemCtrl.getItem(item.name)">
-										<img ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>
-									</a>
-								</div>
-								<div class="carousel-caption">
-									<h2>{{item.name}}</h2>
-								</div>
-							</div>
-						</div>
-											
-						<!-- Carousel nav -->
-						<a class="carousel-control left" href="#myCarousel" data-slide="prev">
-							<span class="glyphicon glyphicon-chevron-left"/>
-						</a>
-						<a class="carousel-control right" href="#myCarousel" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right"/>
-						</a>
-					</div>
-				</div>	
+				
+				<div class="lazy">
+					<div><div class="image"><img data-lazy="img/lazyfonz1.png"/></div></div>
+					<div><div class="image"><img data-lazy="img/lazyfonz2.png"/></div></div>
+					<div><div class="image"><img data-lazy="img/lazyfonz3.png"/></div></div>
+					<div><div class="image"><img data-lazy="img/lazyfonz4.png"/></div></div>
+					<div><div class="image"><img data-lazy="img/lazyfonz5.png"/></div></div>
+					<div><div class="image"><img data-lazy="img/lazyfonz6.png"/></div></div>
+				</div>
 			</div>	
 		</div>
 	</div>
@@ -148,6 +123,10 @@
 	<script type="text/javascript" src="javascripts/jquery-1.11.1.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+	<script type="text/javascript" src="slick/slick.js"></script>
+	<script type="text/javascript" src="javascripts/scripts.js"></script>
    </div>
   </body>
 </html>
