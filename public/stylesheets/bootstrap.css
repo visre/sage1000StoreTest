@@ -9,16 +9,11 @@ html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
-	  
-	background: url(../img/congruent_outline.png) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;	  
 }
 body {
   min-height: 2000px;
   padding-top: 70px;
+  background: url(../img/squairy_light.png) repeat; 
 }
 article,
 aside,

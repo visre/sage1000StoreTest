@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="gallery" ng-controller="PanelController as panel">
+<html ng-app="gallery" ng-controller="ItemController as itemCtrl" ng-init="init()"> 
   <head>
     <link rel="stylesheet" type="text/css" href="../stylesheets/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="../stylesheets/bootstrap-theme.min.css" />    
@@ -27,8 +27,7 @@
 	</style> 
   </head>
   <body>
-  <div ng-controller="ItemController as itemCtrl" ng-init="init()">
-	<div ng-controller="ContainerController as containerCtrl">
+	<div class="container" ng-controller="ContainerController as containerCtrl">
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
@@ -56,30 +55,9 @@
 			</div>
 		</div>
 		
-		<div class="container theme-showcase" ng-controller='CarouselController as carouselCtrl'> 		
-			<div class="panel" ng-show="panel.isSelected(0)">
-				<h1>Home</h1>					
-			</div>
-					
-			<div class="panel" ng-show="panel.isSelected(1)">
-				<h1>Mobile Apps</h1>	
-			</div>
-						
-			<div class="panel" ng-show="panel.isSelected(2)">
-				<h1>Dashboards</h1>		
-			</div>
-			
-			<div class="panel" ng-show="panel.isSelected(3)">
-				<h1>Workflows</h1>		
-			</div>
-			
-			<div class="panel" ng-show="panel.isSelected(4)">
-				<h1>Activities</h1>		
-			</div>
-			
-			
+		<div class="container theme-showcase" ng-controller='CarouselController as carouselCtrl'> 					
 			<div class="row" ng-show="containerCtrl.isSelected(0)">		
-				<div class="col-sm-4 col-md-3" ng-repeat="item in itemCtrl.items">
+				<div class="col-xs-6 col-md-3" ng-repeat="item in itemCtrl.items">
 					<div class="thumbnail">
 						<a href="/#{{item.name}}" ng-click="itemCtrl.getItem(item.name); containerCtrl.selectTab(1); carouselCtrl.initCarousel()">
 							<img width='50%' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>
@@ -97,16 +75,19 @@
 			</div>	
 			
 			<div ng-show="containerCtrl.isSelected(1)">
-				<div class="jumbotron" ng-repeat="item in itemCtrl.items">
-					<img width='20%' align='left' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>		
-					<h3> {{item.name}} </h3>				
-					<p>{{item.description}}<p>
-					<p>
-						<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?{{item.link}}">download this item</a>
-						<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?{{item.link}}">install this item</a>
-					</p>
-				</div>
-				
+				<div class="panel panel-default" ng-repeat="item in itemCtrl.items">
+					<div class="panel-heading">
+						<h3> {{item.name}} </h3>	
+					</div>
+					<div class="panel-body">
+						<img width='20%' align='left' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>					
+						<p>{{item.description}}</p>
+						<p>
+							<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?{{item.link}}">download this item</a>
+							<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?{{item.link}}">install this item</a>
+						</p>
+					</div>
+				</div>	
 				<div class="multiple-items">
 					<div><div class="image"><img data-lazy="img/lazyfonz1.png"/></div></div>
 					<div><div class="image"><img data-lazy="img/lazyfonz2.png"/></div></div>
@@ -114,7 +95,7 @@
 					<div><div class="image"><img data-lazy="img/lazyfonz4.png"/></div></div>
 					<div><div class="image"><img data-lazy="img/lazyfonz5.png"/></div></div>
 					<div><div class="image"><img data-lazy="img/lazyfonz6.png"/></div></div>
-				</div>			
+				</div>	
 			</div>	
 		</div>
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
@@ -123,15 +104,13 @@
 			</div>
 		</nav>
 	</div>
-	<script type="text/javascript" src="javascripts/angular.js"></script>
+   	<script type="text/javascript" src="javascripts/angular.js"></script>
 	<script type="text/javascript" src="controllers/app.js"></script>
 	<script type="text/javascript" src="javascripts/jquery-1.11.1.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
 	<script type="text/javascript" src="slick/slick.js"></script>
 	<script type="text/javascript" src="javascripts/scripts.js"></script>
-   </div>
   </body>
 </html>
