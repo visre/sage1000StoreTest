@@ -10,8 +10,9 @@ $(document).ready(function() {
         dots: true,
         infinite: true,
         speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 3
+        slidesToShow: 4,
+        slidesToScroll: 4,
+		arrows : true
     });
     $('.one-time').slick({
         dots: true,
@@ -83,8 +84,9 @@ $(document).ready(function() {
     });
     $('.lazy').slick({
         lazyLoad: 'ondemand',
-        slidesToShow: 3,
-        slidesToScroll: 1
+        slidesToShow: 4,
+        slidesToScroll: 4,
+		arrow : true
     });
     $('.autoplay').slick({
         dots: true,
