@@ -34,7 +34,7 @@ function Init(){
 	});
 }
 
-app.get('/gallery/product/download', function(req, res){
+app.get('/product/download', function(req, res){
 	var item = url.parse(req.url).query;
 	var filePath = packages_folder + item + '.zip';
 	blobService.getBlobToFile(package_container, item + '.mob', filePath, function(error, result, response){
@@ -54,7 +54,7 @@ app.get('/gallery/product/download', function(req, res){
 	});			
 });
 
-app.get('/gallery/product/install', function(req, res){
+app.get('/product/install', function(req, res){
     var item = url.parse(req.url).query;
 	var filePath = 'c:\\' + item + '.zip';
 	

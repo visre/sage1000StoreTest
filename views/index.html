@@ -59,15 +59,15 @@
 			<div class="row" ng-show="containerCtrl.isSelected(0)">		
 				<div class="col-xs-6 col-md-3" ng-repeat="item in itemCtrl.items">
 					<div class="thumbnail">
-						<a href="/#{{item.name}}" ng-click="itemCtrl.getItem(item.name); containerCtrl.selectTab(1); carouselCtrl.initCarousel()">
+						<a ng-click="itemCtrl.getItem(item.name); containerCtrl.selectTab(1); carouselCtrl.initCarousel()">
 							<img width='50%' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>
 						</a>
 						<div class="caption">
 							<h3>{{item.name}}</h3>
 							<p>{{item.description}}<p>
 							<p>
-								<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?{{item.link}}">download this item</a>
-								<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?{{item.link}}">install this item</a>
+								<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>
+								<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>
 							</p>
 						</div>
 					</div>
@@ -83,8 +83,8 @@
 						<img width='20%' align='left' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>					
 						<p>{{item.description}}</p>
 						<p>
-							<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?{{item.link}}">download this item</a>
-							<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?{{item.link}}">install this item</a>
+							<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>
+							<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>
 						</p>
 					</div>
 				</div>	
