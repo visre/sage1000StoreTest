@@ -24,7 +24,7 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
 // app.use('/', routes);
-app.get('/', function (req, res){
+app.get('/gallery', function (req, res){
 	res.render('index.html');
 });
 
@@ -69,7 +69,7 @@ app.get('/product/install', function(req, res){
 });
 
 Init();
-var server = app.listen(3000, function() {
+var server = app.listen(8080, function() {
     console.log('Listening on port %d', server.address().port);
 });
 module.exports = app;
