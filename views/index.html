@@ -26,17 +26,7 @@
 	</style> 
   </head>
   <body>
-	<!--<script>
-		var req = new XMLHttpRequest();
-		req.open('GET', document.location, false);
-		req.send(null);
-		var headers = req.getAllResponseHeaders().toLowerCase();
-		alert(headers);
-	</script>-->
-	<script type="text/javascript">
-	alert(document.referrer);
-	</script>
-	<div class="container" ng-controller="ContainerController as containerCtrl">
+	<div class="container" ng-controller="ContainerController as containerCtrl" ng-init="containerCtrl.getReferrer(document.referrer)">
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
@@ -73,10 +63,15 @@
 						</a>
 						<div class="caption">
 							<p>{{item.name}}</p>
-							
 							<p>
-								<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>
-								<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>
+								<script>
+								    var referrer = document.referrer;
+									if (referrer.length == 0){
+									    document.write('<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>'); 			
+									} else {
+									    document.write('<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>');	
+									}
+								</script>
 							</p>
 						</div>
 					</div>
@@ -92,8 +87,14 @@
 						<img width='20%' align='left' style='margin-right:10px' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>					
 						<p>{{item.description}}</p>
 						<p>
-							<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>
-							<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>
+							<script>
+								var referrer = document.referrer;
+								if (referrer.length == 0){
+									document.write('<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>'); 			
+								} else {
+									document.write('<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>');	
+								}
+							</script>
 						</p>
 					</div>
 				</div>	

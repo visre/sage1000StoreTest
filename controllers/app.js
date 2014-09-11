@@ -1,8 +1,8 @@
 (function(){
 	var app = angular.module('gallery',[]);
-			
+	
 	app.controller('ContainerController', function(){
-		this.tab = 0;
+		this.tab = 0;		
 		
 		this.selectTab = function(setTab){
 			this.tab = setTab;
