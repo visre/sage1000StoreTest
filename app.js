@@ -69,7 +69,7 @@ app.get('/product/install', function(req, res){
 });
 
 Init();
-var server = app.listen(8080, function() {
+var server = app.listen(3000, function() {
     console.log('Listening on port %d', server.address().port);
 });
 module.exports = app;
