@@ -16,10 +16,6 @@ app.use(express.static(__dirname + '/public'));
 app.use("/databases", express.static(__dirname + '/databases'));
 app.use("/controllers", express.static(__dirname + '/controllers'));
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
