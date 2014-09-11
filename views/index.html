@@ -26,12 +26,15 @@
 	</style> 
   </head>
   <body>
-	<script>
+	<!--<script>
 		var req = new XMLHttpRequest();
 		req.open('GET', document.location, false);
 		req.send(null);
 		var headers = req.getAllResponseHeaders().toLowerCase();
 		alert(headers);
+	</script>-->
+	<script type="text/javascript">
+	alert(document.referrer);
 	</script>
 	<div class="container" ng-controller="ContainerController as containerCtrl">
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
