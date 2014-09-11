@@ -4600,10 +4600,6 @@ a.list-group-item.active > .badge,
 .thumbnail a > img {
   margin-right: auto;
   margin-left: auto;
-  min-width : 100px;
-  min-height : 100px;
-  max-width : 100px;
-  max-height : 100px;
 }
 a.thumbnail:hover,
 a.thumbnail:focus,
