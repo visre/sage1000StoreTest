@@ -55,16 +55,4 @@
 			});
 		}		
 	}]);
-	
-	app.controller('CarouselController',['$http','$scope', function($http, $scope){	    	
-		this.items = [];
-		
-		this.initCarousel = function(){
-		    var ctrl = this;
-			ctrl.items = [];
-			$http.get('../databases/index.json').success(function(data) {
-				ctrl.items = data;
-			});
-		};
-	}]);
 })();

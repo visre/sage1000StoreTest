@@ -10,6 +10,7 @@ var index_container = 'descriptifs';
 var admzip = require('adm-zip');
 var blobService = azure.createBlobService(storage_account,gallerieKey);
 var packages_folder = __dirname + '/databases/packages/';
+var request = require('request');
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
@@ -52,16 +53,26 @@ app.get('/product/download', function(req, res){
 
 app.get('/product/install', function(req, res){
     var item = url.parse(req.url).query;
-	var filePath = 'c:\\' + item + '.zip';
-	
-	blobService.getBlobToFile(package_container, item + '.mob', filePath, function(error, result, response){
-		if(!error){
-		    console.log(filePath);
-			var zip = new admzip(filePath);
-			zip.extractAllTo('c:\\Extracted\\' + item, true);
-			res.redirect(req.get('referer'));
-		}
-	});	
+	res.json({ 
+		blobUrl : '/product/download?' + item
+	});
+});
+
+app.get('/addProduct', function(req, res){
+	blobService.getBlobToFile(index_container, 'index.json', __dirname + '/databases/index.json', function(error, result, response){
+		blobService.acquireLease(index_container, 'index.json', function(error, result, response){
+			if(error){
+				console.log('blob lease failed');
+			}
+			else{
+				var product = {type : 'product', name : req.data.name, link : req.data.link};
+				fs.readFile('/databases/index.json', "utf8", function (err, data){
+					data.push(product);
+				}
+				console.log('blob lease achieved');
+			};
+		});
+	});
 });
 
 Init();
