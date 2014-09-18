@@ -3,6 +3,22 @@
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ .border-top-radius(@radius) {
+  border-top-right-radius: @radius;
+   border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+  border-bottom-right-radius: @radius;
+     border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+  border-bottom-right-radius: @radius;
+   border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+  border-bottom-left-radius: @radius;
+     border-top-left-radius: @radius;
+}
 
 .btn-default,
 .btn-primary,
