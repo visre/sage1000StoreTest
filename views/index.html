@@ -34,6 +34,10 @@
 	<script type="text/javascript" src="../javascripts/scripts.js"></script>
 	<script type="text/javascript" src="../javascripts/bootstrap.file-input.js"></script>
 	<script type="text/javascript" src="../javascripts/jquery.elevatezoom.js"></script>
+	<script type="text/javascript" src="../javascripts/jssor.core.js"></script>
+    <script type="text/javascript" src="../javascripts/jssor.utils.js"></script>
+    <script type="text/javascript" src="../javascripts/jssor.slider.js"></script>
+    <script type="text/javascript" src="../javascripts/sliderConfig.js"></script>
   </head>
   <body>
 	<div class="container" ng-controller="ContainerController as containerCtrl">
@@ -63,11 +67,11 @@
 					<script>
 						var referrer = document.referrer;
 						if (referrer.length > 0){
-							document.write('<ul class="nav navbar-nav navbar-right"><li><a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a></li></ul>');
+							document.write('<ul class="nav navbar-nav navbar-right"><li><a id="addproduct" ng-click="containerCtrl.selectTab(2)">Add a product</a></li></ul>');
 						}
 						else{
 							//A enlever après test
-							document.write('<ul class="nav navbar-nav navbar-right"><li><a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a></li></ul>');	
+							document.write('<ul class="nav navbar-nav navbar-right"><li><a id="addproduct" ng-click="containerCtrl.selectTab(2)">Add a product</a></li></ul>');	
 						} 
 					</script>
 				</div>
@@ -117,29 +121,100 @@
 					</p>
 				</div>
 			</div>	
-			
-			<img id="img_01" src="../img/lazyfonz1.png"/>
-			
-			<div id="gal1">
-				<a href="#" data-image="../img/lazyfonz1.png" data-zoom-image="../img/lazyfonz1.png"/>
-					<img class="img_02" src="../img/lazyfonz1.png"/>
-				</a>
-				<a href="#" data-image="../img/lazyfonz2.png" data-zoom-image="../img/lazyfonz2.png"/>
-					<img class="img_02" src="../img/lazyfonz2.png"/>
-				</a>
-				<a href="#" data-image="../img/lazyfonz3.png" data-zoom-image="../img/lazyfonz3.png"/>
-					<img class="img_02" src="../img/lazyfonz3.png"/>
-				</a>
-				<a href="#" data-image="../img/lazyfonz4.png" data-zoom-image="../img/lazyfonz4.png"/>
-					<img class="img_02" src="../img/lazyfonz4.png"/>
-				</a>
-				<a href="#" data-image="../img/lazyfonz5.png" data-zoom-image="../img/lazyfonz5.png"/>
-					<img class="img_02" src="../img/lazyfonz5.png"/>
-				</a>
-				<a href="#" data-image="../img/lazyfonz6.png" data-zoom-image="../img/lazyfonz6.png"/>
-					<img class="img_02" src="../img/lazyfonz6.png"/>
-				</a>
-			</div>	
+			<div class="col-sm-6 col-md-5 col-md-offset-3 border-top-radius">
+				<div id="slider2_container" style="position: relative; top: 0px; left: 0px; width: 150px; height: 100px; overflow: hidden; ">
+			        <!-- Slides Container -->
+			        <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
+			            <div>
+			                <img u="image" src="../img/lazyfonz1.png" />
+			                <img u="thumb" src="../img/lazyfonz1.png" />
+			            </div>
+						<div>
+			                <img u="image" src="../img/lazyfonz2.png" />
+			                <img u="thumb" src="../img/lazyfonz2.png" />
+			            </div>
+			            <div>
+			                <img u="image" src="../img/lazyfonz3.png" />
+			                <img u="thumb" src="../img/lazyfonz3.png" />
+			            </div>
+			            <div>
+			                <img u="image" src="../img/lazyfonz4.png" />
+			                <img u="thumb" src="../img/lazyfonz4.png" />
+			            </div>
+			            <div>
+			                <img u="image" src="../img/lazyfonz5.png" />
+			                <img u="thumb" src="../img/lazyfonz5.png" />
+			            </div>
+			        </div>
+			        
+			        <!-- ThumbnailNavigator Skin Begin -->
+			        <div u="thumbnavigator" class="jssort03" style="position: absolute; width: 150px; height: 20px; left:0px; bottom: 0px;">
+			            <div style=" background-color: #000; filter:alpha(opacity=30); opacity:.3; width: 100%; height:100%;"></div>
+
+			            <!-- Thumbnail Item Skin Begin -->
+			            <style>
+			                /* jssor slider thumbnail navigator skin 03 css */
+			                /*
+			                .jssort03 .p            (normal)
+			                .jssort03 .p:hover      (normal mouseover)
+			                .jssort03 .pav          (active)
+			                .jssort03 .pav:hover    (active mouseover)
+			                .jssort03 .pdn          (mousedown)
+			                */
+			                .jssort03 .w, .jssort03 .pav:hover .w
+			                {
+			                	position: absolute;
+			                	width: 60px;
+			                	height: 30px;
+			                	border: white 1px dashed;
+			                }
+			                * html .jssort03 .w
+			                {
+			                	width /**/: 62px;
+			                	height /**/: 32px;
+			                }
+			                .jssort03 .pdn .w, .jssort03 .pav .w { border-style: solid; }
+			                .jssort03 .c
+			                {
+			                	width: 62px;
+			                	height: 32px;
+			                	filter:  alpha(opacity=45);
+			                	opacity: .45;
+			                	
+			                	transition: opacity .6s;
+			                    -moz-transition: opacity .6s;
+			                    -webkit-transition: opacity .6s;
+			                    -o-transition: opacity .6s;
+			                }
+			                .jssort03 .p:hover .c, .jssort03 .pav .c
+			                {
+			                	filter:  alpha(opacity=0);
+			                	opacity: 0;
+			                }
+			                .jssort03 .p:hover .c
+			                {
+			                	transition: none;
+			                    -moz-transition: none;
+			                    -webkit-transition: none;
+			                    -o-transition: none;
+			                }
+			            </style>
+			            <div u="slides">
+			                <div u="prototype" class="p" style="POSITION: absolute; WIDTH: 31px; HEIGHT: 16px; TOP: 0; LEFT: 0;">
+			                    <div class=w>
+			                   		<ThumbnailTemplate style=" WIDTH: 50%; HEIGHT: 50%; border: none;position:absolute; TOP: 0; LEFT: 0;">
+			                   		</ThumbnailTemplate>
+		                   		</div>
+			                    <div class=c style="POSITION: absolute; BACKGROUND-COLOR: #000; TOP: 0; LEFT: 0">
+			                    </div>
+			                </div>
+			            </div>
+			            <!-- Thumbnail Item Skin End -->
+			        </div>
+			        <!-- ThumbnailNavigator Skin End -->
+			    </div>
+		    </div>
+		    <!-- Jssor Slider End -->	
 		</div>	
 		
 		<div class="row" ng-show="containerCtrl.isSelected(2)">
@@ -184,20 +259,5 @@
 			</div>
 		</nav>
 	</div>
-	<script>
-		$(function(){
-			$(".img_02").bind("click", function(e) {
-				$(".postinstall");			
-				$('#img_01').attr('src', this.src);	
-				return true; 
-			});	
-			
-			$.getJSON( "http://www.telize.com/jsonip", function(data){
-				if(data.ip == '193.30.141.1' || data.ip == '193.30.141.2'){
-					$('#addproduct').attr('class','ng-show');
-				}
-			});
-		});
-	  </script>
   </body>
 </html>
