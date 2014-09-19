@@ -63,182 +63,182 @@
 				</div>
 			</div>
 		</div>
-						
-		<div class="row" ng-show="containerCtrl.isSelected(0)">		
-			<div class="col-xs-6 col-md-3" ng-repeat="item in itemCtrl.items">
-				<div class="thumbnail">
-					<a ng-click="itemCtrl.getItem(item.name); containerCtrl.selectTab(1)">
-						<img style="min-width : 100px; min-height : 100px; max-width : 100px; max-height : 100px" data-ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>
-					</a>
-					<div class="caption">
-						<p>{{item.name}}</p>
+		<div class="container">				
+			<div class="row" ng-show="containerCtrl.isSelected(0)">		
+				<div class="col-xs-6 col-md-3" ng-repeat="item in itemCtrl.items">
+					<div class="thumbnail">
+						<a ng-click="itemCtrl.getItem(item.name); containerCtrl.selectTab(1)">
+							<img style="min-width : 100px; min-height : 100px; max-width : 100px; max-height : 100px" data-ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>
+						</a>
+						<div class="caption">
+							<p>{{item.name}}</p>
+							<p>
+								<script>
+									referrer = document.referrer;
+									if (referrer.length == 0){
+										document.write('<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>'); 									
+									} else {
+										document.write('<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>');	
+									}
+								</script>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="row" ng-show="containerCtrl.isSelected(1)">
+				<div class="panel panel-default" ng-repeat="item in itemCtrl.items">
+					<div class="panel-heading">
+						<h3> {{item.name}} </h3>	
+					</div>
+					<div class="panel-body">
+						<img width='20%' align='left' style='margin-right:10px' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>					
+						<p>{{item.description}}</p>
 						<p>
 							<script>
-								referrer = document.referrer;
+								var referrer = document.referrer;
 								if (referrer.length == 0){
-									document.write('<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>'); 									
+									document.write('<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>'); 			
 								} else {
-									document.write('<a name="install" class="btn btn-xs btn-danger" href="/product/install?{{item.link}}">install this item</a>');	
+									document.write('<a name="install" class="btn btn-xs btn-danger postinstall" href="/product/install?{{item.link}}">install this item</a>');	
 								}
 							</script>
 						</p>
 					</div>
-				</div>
-			</div>
-		</div>	
-		
-		<div class="row" ng-show="containerCtrl.isSelected(1)">
-			<div class="panel panel-default" ng-repeat="item in itemCtrl.items">
-				<div class="panel-heading">
-					<h3> {{item.name}} </h3>	
-				</div>
-				<div class="panel-body">
-					<img width='20%' align='left' style='margin-right:10px' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg'/>					
-					<p>{{item.description}}</p>
-					<p>
-						<script>
-							var referrer = document.referrer;
-							if (referrer.length == 0){
-								document.write('<a name="download" class="btn btn-xs btn-success" href="/product/download?{{item.link}}">download this item</a>'); 			
-							} else {
-								document.write('<a name="install" class="btn btn-xs btn-danger postinstall" href="/product/install?{{item.link}}">install this item</a>');	
-							}
-						</script>
-					</p>
-				</div>
-			</div>	
-			<div class="col-sm-6 col-md-5 col-md-offset-3 border-top-radius">
-				<div id="slider2_container" style="position: relative; top: 0px; left: 0px; width: 150px; height: 100px; overflow: hidden; ">
-			        <!-- Slides Container -->
-			        <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
-			            <div>
-			                <img u="image" src="/img/lazyfonz1.png" />
-			                <img u="thumb" src="/img/lazyfonz1.png" />
-			            </div>
-						<div>
-			                <img u="image" src="/img/lazyfonz2.png" />
-			                <img u="thumb" src="/img/lazyfonz2.png" />
-			            </div>
-			            <div>
-			                <img u="image" src="/img/lazyfonz3.png" />
-			                <img u="thumb" src="/img/lazyfonz3.png" />
-			            </div>
-			            <div>
-			                <img u="image" src="/img/lazyfonz4.png" />
-			                <img u="thumb" src="/img/lazyfonz4.png" />
-			            </div>
-			            <div>
-			                <img u="image" src="/img/lazyfonz5.png" />
-			                <img u="thumb" src="/img/lazyfonz5.png" />
-			            </div>
-			        </div>
-			        
-			        <!-- ThumbnailNavigator Skin Begin -->
-			        <div u="thumbnavigator" class="jssort03" style="position: absolute; width: 150px; height: 20px; left:0px; bottom: 0px;">
-			            <div style=" background-color: #000; filter:alpha(opacity=30); opacity:.3; width: 100%; height:100%;"></div>
+				</div>	
+				<div class="col-sm-6 col-md-5 col-md-offset-3 border-top-radius">
+					<div id="slider2_container" style="position: relative; top: 0px; left: 0px; width: 150px; height: 100px; overflow: hidden; ">
+				        <!-- Slides Container -->
+				        <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
+				            <div>
+				                <img u="image" src="/img/lazyfonz1.png" />
+				                <img u="thumb" src="/img/lazyfonz1.png" />
+				            </div>
+							<div>
+				                <img u="image" src="/img/lazyfonz2.png" />
+				                <img u="thumb" src="/img/lazyfonz2.png" />
+				            </div>
+				            <div>
+				                <img u="image" src="/img/lazyfonz3.png" />
+				                <img u="thumb" src="/img/lazyfonz3.png" />
+				            </div>
+				            <div>
+				                <img u="image" src="/img/lazyfonz4.png" />
+				                <img u="thumb" src="/img/lazyfonz4.png" />
+				            </div>
+				            <div>
+				                <img u="image" src="/img/lazyfonz5.png" />
+				                <img u="thumb" src="/img/lazyfonz5.png" />
+				            </div>
+				        </div>
+				        
+				        <!-- ThumbnailNavigator Skin Begin -->
+				        <div u="thumbnavigator" class="jssort03" style="position: absolute; width: 150px; height: 20px; left:0px; bottom: 0px;">
+				            <div style=" background-color: #000; filter:alpha(opacity=30); opacity:.3; width: 100%; height:100%;"></div>
 
-			            <!-- Thumbnail Item Skin Begin -->
-			            <style>
-			                /* jssor slider thumbnail navigator skin 03 css */
-			                /*
-			                .jssort03 .p            (normal)
-			                .jssort03 .p:hover      (normal mouseover)
-			                .jssort03 .pav          (active)
-			                .jssort03 .pav:hover    (active mouseover)
-			                .jssort03 .pdn          (mousedown)
-			                */
-			                .jssort03 .w, .jssort03 .pav:hover .w
-			                {
-			                	position: absolute;
-			                	width: 60px;
-			                	height: 30px;
-			                	border: white 1px dashed;
-			                }
-			                * html .jssort03 .w
-			                {
-			                	width /**/: 62px;
-			                	height /**/: 32px;
-			                }
-			                .jssort03 .pdn .w, .jssort03 .pav .w { border-style: solid; }
-			                .jssort03 .c
-			                {
-			                	width: 62px;
-			                	height: 32px;
-			                	filter:  alpha(opacity=45);
-			                	opacity: .45;
-			                	
-			                	transition: opacity .6s;
-			                    -moz-transition: opacity .6s;
-			                    -webkit-transition: opacity .6s;
-			                    -o-transition: opacity .6s;
-			                }
-			                .jssort03 .p:hover .c, .jssort03 .pav .c
-			                {
-			                	filter:  alpha(opacity=0);
-			                	opacity: 0;
-			                }
-			                .jssort03 .p:hover .c
-			                {
-			                	transition: none;
-			                    -moz-transition: none;
-			                    -webkit-transition: none;
-			                    -o-transition: none;
-			                }
-			            </style>
-			            <div u="slides">
-			                <div u="prototype" class="p" style="POSITION: absolute; WIDTH: 31px; HEIGHT: 16px; TOP: 0; LEFT: 0;">
-			                    <div class=w>
-			                   		<ThumbnailTemplate style=" WIDTH: 50%; HEIGHT: 50%; border: none;position:absolute; TOP: 0; LEFT: 0;">
-			                   		</ThumbnailTemplate>
-		                   		</div>
-			                    <div class=c style="POSITION: absolute; BACKGROUND-COLOR: #000; TOP: 0; LEFT: 0">
-			                    </div>
-			                </div>
-			            </div>
-			            <!-- Thumbnail Item Skin End -->
-			        </div>
-			        <!-- ThumbnailNavigator Skin End -->
+				            <!-- Thumbnail Item Skin Begin -->
+				            <style>
+				                /* jssor slider thumbnail navigator skin 03 css */
+				                /*
+				                .jssort03 .p            (normal)
+				                .jssort03 .p:hover      (normal mouseover)
+				                .jssort03 .pav          (active)
+				                .jssort03 .pav:hover    (active mouseover)
+				                .jssort03 .pdn          (mousedown)
+				                */
+				                .jssort03 .w, .jssort03 .pav:hover .w
+				                {
+				                	position: absolute;
+				                	width: 60px;
+				                	height: 30px;
+				                	border: white 1px dashed;
+				                }
+				                * html .jssort03 .w
+				                {
+				                	width /**/: 62px;
+				                	height /**/: 32px;
+				                }
+				                .jssort03 .pdn .w, .jssort03 .pav .w { border-style: solid; }
+				                .jssort03 .c
+				                {
+				                	width: 62px;
+				                	height: 32px;
+				                	filter:  alpha(opacity=45);
+				                	opacity: .45;
+				                	
+				                	transition: opacity .6s;
+				                    -moz-transition: opacity .6s;
+				                    -webkit-transition: opacity .6s;
+				                    -o-transition: opacity .6s;
+				                }
+				                .jssort03 .p:hover .c, .jssort03 .pav .c
+				                {
+				                	filter:  alpha(opacity=0);
+				                	opacity: 0;
+				                }
+				                .jssort03 .p:hover .c
+				                {
+				                	transition: none;
+				                    -moz-transition: none;
+				                    -webkit-transition: none;
+				                    -o-transition: none;
+				                }
+				            </style>
+				            <div u="slides">
+				                <div u="prototype" class="p" style="POSITION: absolute; WIDTH: 31px; HEIGHT: 16px; TOP: 0; LEFT: 0;">
+				                    <div class=w>
+				                   		<ThumbnailTemplate style=" WIDTH: 50%; HEIGHT: 50%; border: none;position:absolute; TOP: 0; LEFT: 0;">
+				                   		</ThumbnailTemplate>
+			                   		</div>
+				                    <div class=c style="POSITION: absolute; BACKGROUND-COLOR: #000; TOP: 0; LEFT: 0">
+				                    </div>
+				                </div>
+				            </div>
+				            <!-- Thumbnail Item Skin End -->
+				        </div>
+				        <!-- ThumbnailNavigator Skin End -->
+				    </div>
 			    </div>
-		    </div>
-		    <!-- Jssor Slider End -->	
-		</div>	
-		
-		<div class="row" ng-show="containerCtrl.isSelected(2)">
-			<h1>Add a product</h1>
-			<div class="col-sm-6 col-md-4 col-md-offset-4 border-top-radius">
-				<form method="POST" enctype="multipart/form-data" action="/addProduct">
-					<fieldset>
-						<div class="form-group">
-							<label for="inputName">Name</label>
-							<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Name">
-						</div>
-						<div class="form-group">
-							<label for="inputDescription">Description</label>
-							<input type="textarea" class="form-control" name="inputDescription" id="inputDescription" placeholder="Description">
-						</div>
-						<div class="form-group">
-							<label for="inputCategory">Category</label>	
-							<select class="form-control" name="inputCategory">
-								<option value="Activities">Activities</option>	
-								<option value="Dashboards">Dashboards</option>
-								<option value="Mobile Apps">Mobile Apps</option>
-								<option value="Workflows">Workflows</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="inputImage">Image</label>
-							<input type="file" accept=".jpg,.jpeg" id="inputImage" name="inputImage" data-filename-placement="inside">
-						</div>
-						<div class="form-group">
-							<label for="inputPackage">Package</label>
-							<input type="file" accept=".zip" id="inputPackage" name="inputPackage" data-filename-placement="inside">
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</fieldset>
-				</form>
+			    <!-- Jssor Slider End -->	
+			</div>	
+			
+			<div class="row" ng-show="containerCtrl.isSelected(2)">
+				<h1>Add a product</h1>
+				<div class="col-sm-6 col-md-4 col-md-offset-4 border-top-radius">
+					<form method="POST" enctype="multipart/form-data" action="/addProduct">
+						<fieldset>
+							<div class="form-group">
+								<label for="inputName">Name</label>
+								<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Name">
+							</div>
+							<div class="form-group">
+								<label for="inputDescription">Description</label>
+								<input type="textarea" class="form-control" name="inputDescription" id="inputDescription" placeholder="Description">
+							</div>
+							<div class="form-group">
+								<label for="inputCategory">Category</label>	
+								<select class="form-control" name="inputCategory">
+									<option value="Activities">Activities</option>	
+									<option value="Dashboards">Dashboards</option>
+									<option value="Mobile Apps">Mobile Apps</option>
+									<option value="Workflows">Workflows</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="inputImage">Image</label>
+								<input type="file" accept=".jpg,.jpeg" id="inputImage" name="inputImage" data-filename-placement="inside">
+							</div>
+							<div class="form-group">
+								<label for="inputPackage">Package</label>
+								<input type="file" accept=".zip" id="inputPackage" name="inputPackage" data-filename-placement="inside">
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</fieldset>
+					</form>
+				</div>
 			</div>
 		</div>
-		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 			<div class="container">
 				
