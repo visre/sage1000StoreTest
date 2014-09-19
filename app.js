@@ -49,12 +49,15 @@ app.get('/product/download', function(req, res){
 			returnHeaders['Content-Type'] = 'application/zip';
 			res.writeHead(200, returnHeaders); 
 			var stream = fs.createReadStream(filePath);
-			stream.on('open', function () {				
+			stream.on('open', function () {			
 				stream.pipe(res);
 			});
 			stream.on('end', function () {
 				res.end();
 			});			
+		}
+		else{
+			console.log(error);
 		}
 	});			
 });
