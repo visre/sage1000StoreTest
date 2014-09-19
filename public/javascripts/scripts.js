@@ -167,14 +167,14 @@ $(document).ready(function() {
         }
     });
 
-    $('ul.nav a').on('click', function(event) {
-        event.preventDefault();
-        var targetID = $(this).attr('href');
-        var targetST = $(targetID).offset().top - 48;
-        $('body, html').animate({
-            scrollTop: targetST + 'px'
-        }, 300);
-    });
+    // $('ul.nav a').on('click', function(event) {
+    //     event.preventDefault();
+    //     var targetID = $(this).attr('href');
+    //     var targetST = $('#' + targetID).offset().top - 48;
+    //     $('body, html').animate({
+    //         scrollTop: targetST + 'px'
+    //     }, 300);
+    // });
 
     $('.single-item-rtl').slick({
         dots: true,
