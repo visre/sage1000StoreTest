@@ -45,7 +45,7 @@
 		this.getItem = function(name){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('../databases/packages.json').success(function(data){
+			$http.get('/databases/packages.json').success(function(data){
 				for(var index = 0; index < data.length; index++){
 					var item = data[index];
 					if(item.name == name){
