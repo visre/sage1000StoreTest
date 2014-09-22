@@ -79,13 +79,11 @@ app.post('/addProduct', function(req, res){
 	//5 - Upload the package
 	//6 - Release the blob
 	blobService.getBlobToFile(index_container, 'packages.json', __dirname + '/databases/packages.json', function(error, result, response){
-		alert("début de l'ajout");
 		var form = new formidable.IncomingForm();
 		form.parse(req, function(err, fields, files){
 			var name = fields.inputName.replace(' ', '');
 			var product = {"type" : "product", "name" : fields.inputName, "link" : name, "description" : fields.inputDescription, "price" : 0, "file" : name, "package" : name, "category" : fields.inputCategory, "countView" : 0, "countOrder" : 0};
 			jf.readFile(__dirname + '/databases/packages.json', function (err, obj){
-				alert("parcours des objets");
 				for(var i = 0; i < obj.length; i++){
 					if(obj[i]['link'] === name){
 						res.render('failure.html');
@@ -95,7 +93,6 @@ app.post('/addProduct', function(req, res){
 				obj.push(product);
 				jf.writeFile(__dirname + '/databases/packages.json', obj, function(err){
 					if(!err){
-						alert("écriture du packages");
 						blobService.createBlockBlobFromFile(index_container, "packages.json", __dirname + '/databases/packages.json', function(){});
 					}
 					else{
@@ -103,9 +100,7 @@ app.post('/addProduct', function(req, res){
 					}
 				});
 				blobService.createBlockBlobFromFile(package_container, name + ".zip", files.inputPackage.path, function(){
-					alert("création du package");
 					blobService.createBlockBlobFromFile(images_container, name + ".jpg", files.inputImage.path, function(){
-						alert("package créé!");
 						res.render('success.html');
 					});
 				});						
