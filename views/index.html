@@ -54,7 +54,11 @@
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>
+								<script>
+								referrer = document.referrer;
+								if (referrer.length == 0){
+									$(".navbar-right").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
+								}
 							</li>
 						</ul>
 					</div>
@@ -76,7 +80,7 @@
 						</div>
 					</div>
 					<script>
-						var referrer = document.referrer;
+						referrer = document.referrer;
 						if (referrer.length == 0){
 							$(".thumbButton").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 								
 						} else {
