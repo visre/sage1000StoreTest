@@ -55,10 +55,11 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<script>
-								referrer = document.referrer;
-								if (referrer.length == 0){
-									$(".navbar-right").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
-								}
+									var referrer = document.referrer;
+									if (referrer.length == 0){
+										$(".navbar-right").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
+									}
+								</script>
 							</li>
 						</ul>
 					</div>
