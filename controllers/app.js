@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('gallery',['ngRoute']);
+	var app = angular.module('gallery',[]);
 
 	app.controller('ContainerController', function(){
 		this.tab = 0;		
