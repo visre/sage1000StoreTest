@@ -53,11 +53,11 @@
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li>
+							<li class="addProduct">
 								<script>
 									var referrer = document.referrer;
 									if (referrer.length == 0){
-										$(".navbar-right").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
+										$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
 									}
 								</script>
 							</li>
