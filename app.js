@@ -161,6 +161,9 @@ app.post('/addProduct', function(req, res){
 
 Init();
 var server = app.listen(3000, function() {
+	console.log(server.timeout);
+	server.timeout = 0;
+	console.log(server.timeout);
     console.log('Listening on port %d', server.address().port);
 });
 module.exports = app;
