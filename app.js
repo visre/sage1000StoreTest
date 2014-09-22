@@ -65,10 +65,10 @@ app.get('/product/download', function(req, res){
 app.get('/product/install', function(req, res){
     var item = url.parse(req.url).query;
     res.contentType('application/json');
-	var url = { 
+	var adresse = { 
 		"blobUrl" : '/product/download?' + item
 	};
-	res.end(url);
+	res.end(JSON.stringify(adresse));
 });
 
 app.post('/addProduct', function(req, res){
