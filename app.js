@@ -71,7 +71,7 @@ app.get('/product/install', function(req, res){
 	res.end(url);
 });
 
-app.get('/addProduct', function(req, res){
+app.post('/addProduct', function(req, res){
 	//1 - Lease the blob
 	//2 - Get the blob & read
 	//3 - Write the product
