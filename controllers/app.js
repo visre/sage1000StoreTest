@@ -1,6 +1,6 @@
 (function(){
 	var app = angular.module('gallery',['ngRoute']);
-	
+
 	app.controller('ContainerController', function(){
 		this.tab = 0;		
 		
@@ -55,4 +55,5 @@
 			});
 		}		
 	}]);
+	angular.bootstrap(document,['gallery']);
 })();
