@@ -48,9 +48,10 @@ app.get('/product/download', function(req, res){
 		    var returnHeaders = {};
 			returnHeaders['Content-Disposition'] = 'attachment; filename="'+ item +'.zip"';
 			returnHeaders['Content-Type'] = 'application/zip';
+			returnHeaders['Connection'] = "close";
 			res.writeHead(200, returnHeaders); 
 			var stream = fs.createReadStream(filePath);
-			stream.on('open', function () {			
+			stream.on('open', function () {		
 				stream.pipe(res);
 			});
 			stream.on('end', function () {
@@ -65,11 +66,13 @@ app.get('/product/download', function(req, res){
 
 app.get('/product/install', function(req, res){
     var item = url.parse(req.url).query;
+    var returnHeaders = {};
+    returnHeaders['Connection'] = "close";
+	res.writeHead(200, returnHeaders); 
     res.contentType('application/json');
 	var adresse = { 
 		"blobUrl" : '/product/download?' + item
 	};
-	res.set("Connection", "close");	
 	res.end(JSON.stringify(adresse));
 });
 
