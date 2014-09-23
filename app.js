@@ -165,7 +165,7 @@ var server = app.listen(3000, function() {
 });
 
 server.on('connection', function(socket){
-	socket.setKeepAlive(false,[0]);
-	// socket.setTimeout(1000);
+	// socket.setKeepAlive(false,[0]);
+	socket.setTimeout(1000);
 });
 module.exports = app;
