@@ -18,8 +18,10 @@
 		$scope.init = function(){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('/databases/packages.json').success(function(data) {
+			var canceler = $q.defer();
+			$http.get('/databases/packages.json', {timeout : canceler.promise}).success(function(data) {
 				ctrl.items = data;
+				canceler.resolve();
 			});
 		};
 
@@ -48,13 +50,15 @@
 		this.getItem = function(name){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('/databases/packages.json').success(function(data){
+			var canceler = $q.defer();
+			$http.get('/databases/packages.json', {timeout : canceler.promise}).success(function(data) {
 				for(var index = 0; index < data.length; index++){
 					var item = data[index];
 					if(item.name == name){
 						ctrl.items.push(item);
 					}
 				}
+				canceler.resolve();
 			});
 		}		
 	}]);
