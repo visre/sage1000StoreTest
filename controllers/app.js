@@ -40,9 +40,9 @@
 							ctrl.items.push(item);						
 						}
 					}
-				}								
+				}	
+				canceler.resolve();							
 			});	
-			canceler.resolve();
 		};
 		
 		this.getItem = function(name){
