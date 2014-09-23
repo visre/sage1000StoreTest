@@ -64,6 +64,10 @@ app.get('/product/download', function(req, res){
 	});			
 });
 
+app.get('/databases/packages.json'), function(req, res){
+	res.set("Connection", "close");
+});
+
 app.get('/product/install', function(req, res){
     var item = url.parse(req.url).query;
     var returnHeaders = {};
@@ -172,12 +176,8 @@ app.post('/addProduct', function(req, res){
 // 	});	
 // });
 
-
-
-
-
 Init();
-var server = app.listen(3000, function() {
+var server = app.listen(80, function() {
     console.log('Listening on port %d', server.address().port);
 });
 
