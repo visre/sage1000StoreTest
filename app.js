@@ -69,6 +69,7 @@ app.get('/product/install', function(req, res){
 	var adresse = { 
 		"blobUrl" : '/product/download?' + item
 	};
+	res.set("Connection", "close");	
 	res.end(JSON.stringify(adresse));
 });
 
