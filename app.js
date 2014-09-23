@@ -30,6 +30,7 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
 app.get('/gallery', function (req, res){
+	res.set("Connection", "close");	
 	res.render('index.html');
 });
 
@@ -70,6 +71,13 @@ app.get('/product/install', function(req, res){
 	};
 	res.end(JSON.stringify(adresse));
 });
+
+app.get('/', function(req, res){
+	res.set("Connection", "close");	
+	res.end();
+});	
+
+
 
 app.post('/addProduct', function(req, res){
 	//1 - Lease the blob
@@ -159,16 +167,20 @@ app.post('/addProduct', function(req, res){
 // 	});	
 // });
 
+
+
+
+
 Init();
 var server = app.listen(3000, function() {
     console.log('Listening on port %d', server.address().port);
 });
 
-server.on('connection', function(socket){
+/*server.on('connection', function(socket){
 	console.log("connect");
 	// socket.setKeepAlive(false,[0]);
 	socket.setTimeout(2000, function(){
 		socket.destroy();
-	});
-});
+	});*/
+// });
 module.exports = app;
