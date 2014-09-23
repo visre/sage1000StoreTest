@@ -13,7 +13,7 @@
 		}
 	});
 	
-	app.controller('ItemController',['$http','$scope', function($http, $scope){	    	
+	app.controller('ItemController',['$http','$scope', '$q', function($http, $scope, $q){	    	
 		this.items = [];	
 		$scope.init = function(){
 			var ctrl = this;
