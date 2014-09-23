@@ -23,7 +23,7 @@
 		$scope.init = function(){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('/databases/packages.json', config).success(function(data) {
+			$http.get('databases/packages.json', config).success(function(data) {
 				ctrl.items = data;
 			});
 		};
@@ -33,7 +33,7 @@
 		this.getItems = function(category){
 		    var ctrl = this;
 			ctrl.items = [];
-			$http.get('../databases/packages.json', config).success(function(data) {
+			$http.get('databases/packages.json', config).success(function(data) {
 				if (category == 'All'){
 					ctrl.items = data;
 				}
@@ -51,7 +51,7 @@
 		this.getItem = function(name){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('/databases/packages.json', config).success(function(data){
+			$http.get('databases/packages.json', config).success(function(data){
 				for(var index = 0; index < data.length; index++){
 					var item = data[index];
 					if(item.name == name){
