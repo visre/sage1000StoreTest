@@ -14,11 +14,16 @@
 	});
 	
 	app.controller('ItemController',['$http','$scope', function($http, $scope){	    	
+		var config = {headers : {
+				'Connection' : 'close'
+			}
+		};
+
 		this.items = [];	
 		$scope.init = function(){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('../databases/packages.json').success(function(data) {
+			$http.get('/databases/packages.json', config).success(function(data) {
 				ctrl.items = data;
 			});
 		};
