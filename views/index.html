@@ -51,12 +51,6 @@
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="addProduct">
-								<script>
-									var referrer = document.referrer;
-									if (referrer.length == 0){
-										$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
-									}
-								</script>
 							</li>
 						</ul>
 					</div>
@@ -77,14 +71,6 @@
 							</div>
 						</div>
 					</div>
-					<script>
-						referrer = document.referrer;
-						if (referrer.length == 0){
-							$(".thumbButton").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 								
-						} else {
-							$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
-						}
-					</script>
 				</div>	
 				
 				<div class="row" ng-show="containerCtrl.isSelected(1)" ng-cloak>
@@ -100,13 +86,6 @@
 							</p>
 						</div>
 					</div>	
-					<script>
-						if (referrer.length == 0){
-							$(".thumbButton2").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 									
-						} else {
-							$(".thumbButton2").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
-						}
-					</script>
 					<div class="col-sm-6 col-md-5 col-md-offset-3 border-top-radius">
 						<div id="slider2_container" style="position: relative; top: 0px; left: 0px; width: 150px; height: 100px; overflow: hidden; ">
 					        <!-- Slides Container -->
@@ -239,11 +218,6 @@
 					</div>
 				</div>
 			</div>
-			<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-				<div class="container">
-					
-				</div>
-			</nav>
 		</div>
 		<script type="application/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="application/javascript" src="//code.angularjs.org/1.2.25/angular.min.js"></script>
@@ -257,6 +231,23 @@
 					}
 				});
 			});
+
+			var referrer = document.referrer;
+			if (referrer.length == 0){
+				$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
+			}
+
+			if (referrer.length == 0){
+				$(".thumbButton2").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 									
+			} else {
+				$(".thumbButton2").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
+			}
+
+			if (referrer.length == 0){
+				$(".thumbButton").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 								
+			} else {
+				$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
+			}
 		</script>
 		<script type="application/javascript" src="/javascripts/bootstrap.file-input.js"></script>
 		<script type="application/javascript" src="/javascripts/jssor.core.js"></script>
