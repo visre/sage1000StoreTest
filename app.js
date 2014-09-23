@@ -53,6 +53,7 @@ app.get('/product/download', function(req, res){
 				stream.pipe(res);
 			});
 			stream.on('end', function () {
+				req.connection.destroy();
 				res.end();
 			});			
 		}
@@ -68,6 +69,7 @@ app.get('/product/install', function(req, res){
 	var adresse = { 
 		"blobUrl" : '/product/download?' + item
 	};
+	req.connection.destroy();
 	res.end(JSON.stringify(adresse));
 });
 
@@ -107,6 +109,7 @@ app.post('/addProduct', function(req, res){
 					console.log("create blob package");
 					blobService.createBlockBlobFromFile(images_container, name + ".jpg", files.inputImage.path, function(){
 						console.log("create blob jpg");
+						req.connection.destroy();
 						res.render('success.html');
 					});
 				});						
