@@ -14,15 +14,16 @@
 	});
 	
 	app.controller('ItemController',['$http','$scope', function($http, $scope){	    	
-		this.items = [];
-		
+		this.items = [];	
 		$scope.init = function(){
-		    var ctrl = this;
+			var ctrl = this;
 			ctrl.items = [];
 			$http.get('../databases/packages.json').success(function(data) {
 				ctrl.items = data;
 			});
 		};
+
+		$scope.init();
 			
 		this.getItems = function(category){
 		    var ctrl = this;
