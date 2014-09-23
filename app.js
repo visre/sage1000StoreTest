@@ -119,6 +119,7 @@ app.post('/addProduct', function(req, res){
 					console.log("create blob package");
 					blobService.createBlockBlobFromFile(images_container, name + ".jpg", files.inputImage.path, function(){
 						console.log("create blob jpg");
+						res.set("Connection", "close");	
 						res.render('success.html');
 					});
 				});						
