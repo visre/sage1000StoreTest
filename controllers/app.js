@@ -16,9 +16,10 @@
 	app.controller('ItemController',['$scope', '$http', function($scope, $http){	  
 		this.items = [];	
 		this.init = function(){
-			$scope.items = [];
+			var ctrl = this;
+			ctrl.items = [];
 			$http.get('/getPackageJSON').success(function(data){
-				this.items = data;
+				ctrl.items = data;
 			});
 		};
 
