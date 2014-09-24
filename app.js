@@ -64,6 +64,8 @@ app.get('/product/download', function(req, res){
 	});			
 });
 
+
+
 app.get('/product/install', function(req, res){
     var item = url.parse(req.url).query;
     var returnHeaders = {};
@@ -81,6 +83,12 @@ app.get('/', function(req, res){
 	res.end();
 });	
 
+app.get('/getPackageJSON', function(req, res){
+	res.set("Connection", "close");
+	jf.readFile(__dirname + '/databases/packages.json', function (err, obj){
+		res.send(obj);
+	});
+});
 
 
 app.post('/addProduct', function(req, res){
@@ -119,7 +127,7 @@ app.post('/addProduct', function(req, res){
 					console.log("create blob package");
 					blobService.createBlockBlobFromFile(images_container, name + ".jpg", files.inputImage.path, function(){
 						console.log("create blob jpg");
-						res.set("Connection", "close");	
+						// res.set("Connection", "close");	
 						res.render('success.html');
 					});
 				});						
@@ -127,6 +135,7 @@ app.post('/addProduct', function(req, res){
 		});
 	});
 });
+
 
 // app.get('/product/delete', function(req, res){
 // 	//delete package, image & json

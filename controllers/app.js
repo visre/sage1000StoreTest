@@ -13,25 +13,21 @@
 		}
 	});
 	
-	app.controller('ItemController',['$http','$scope', '$q', function($http, $scope, $q){	    	
+	app.controller('ItemController',['$scope', '$http', function($scope, $http){	  
 		this.items = [];	
-		$scope.init = function(){
-			var ctrl = this;
-			ctrl.items = [];
-			var canceler = $q.defer();
-			$http.get('/databases/packages.json', {timeout : canceler.promise}).success(function(data) {
-				ctrl.items = data;
-				canceler.resolve();
+		this.init = function(){
+			$scope.items = [];
+			$http.get('/getPackageJSON').success(function(data){
+				this.items = data;
 			});
 		};
 
-		$scope.init();
+		this.init();
 			
 		this.getItems = function(category){
-		    var ctrl = this;
+			var ctrl = this;
 			ctrl.items = [];
-			var canceler = $q.defer();
-			$http.get('/databases/packages.json', {timeout : canceler.promise}).success(function(data) {
+			$http.get('/getPackageJSON').success(function(data){
 				if (category == 'All'){
 					ctrl.items = data;
 				}
@@ -39,28 +35,25 @@
 					for(var index = 0; index < data.length; index++){
 						var item = data[index];
 						if(item.category == category){
-							ctrl.items.push(item);						
+							ctrl.items.push(item);											
 						}
 					}
-				}	
-				canceler.resolve();							
-			});	
+				}
+			});
 		};
 		
 		this.getItem = function(name){
 			var ctrl = this;
 			ctrl.items = [];
-			var canceler = $q.defer();
-			$http.get('/databases/packages.json', {timeout : canceler.promise}).success(function(data) {
+			$http.get('/getPackageJSON').success(function(data){
 				for(var index = 0; index < data.length; index++){
 					var item = data[index];
 					if(item.name == name){
-						ctrl.items.push(item);
+						$scope.items.push(item);
 					}
 				}
-				canceler.resolve();
-			});
-		}		
+			});	
+		};
 	}]);
 	angular.bootstrap(document,['gallery']);
 })();
