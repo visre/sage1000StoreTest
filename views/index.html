@@ -268,27 +268,29 @@
 				});
 				
 				app.controller('ItemController',['$scope', '$http', function($scope, $http){	  
-					$scope.items = [];	
+					this.items = [];	
 					this.init = function(){
-						$scope.items = [];
+						var ctrl = this;
+						ctrl.items = [];
 						$http.get('/getPackageJSON').success(function(data){
-							$scope.items = data;
+							ctrl.items = data;
 						});
 					};
 
 					this.init();
 						
 					this.getItems = function(category){
-						$scope.items = [];
+						var ctrl = this;
+						ctrl.items = [];
 						$http.get('/getPackageJSON').success(function(data){
 							if (category == 'All'){
-								$scope.items = data;
+								ctrl.items = data;
 							}
 							else{
 								for(var index = 0; index < data.length; index++){
 									var item = data[index];
 									if(item.category == category){
-										$scope.items.push(item);											
+										ctrl.items.push(item);											
 									}
 								}
 							}
@@ -296,12 +298,13 @@
 					};
 					
 					this.getItem = function(name){
-						$scope.items = [];
+						var ctrl = this;
+						ctrl.items = [];
 						$http.get('/getPackageJSON').success(function(data){
 							for(var index = 0; index < data.length; index++){
 								var item = data[index];
 								if(item.name == name){
-									$scope.items.push(item);
+									ctrl.items.push(item);
 								}
 							}
 						});	
