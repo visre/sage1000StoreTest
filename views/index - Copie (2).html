@@ -36,19 +36,19 @@
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li ng-class="{active: panel.isSelected(0)}">
-								<a href="#" ng-click="itemCtrl.setCategory('All'); panel.selectTab(0); containerCtrl.selectTab(0)">Home</a>
+								<a href="#" ng-click="itemCtrl.getItems('All'); panel.selectTab(0); containerCtrl.selectTab(0)">Home</a>
 							</li>
 							<li ng-class="{active: panel.isSelected(1)}">
-								<a href="#mobileapps" ng-click="itemCtrl.setCategory('Mobile Apps'); panel.selectTab(1); containerCtrl.selectTab(0)">Mobile Apps</a>
+								<a href="#mobileapps" ng-click="itemCtrl.getItems('Mobile Apps'); panel.selectTab(1); containerCtrl.selectTab(0)">Mobile Apps</a>
 							</li>
 							<li ng-class="{active: panel.isSelected(2)}">
-								<a href="#dashboards" ng-click="itemCtrl.setCategory('Dashboards'); panel.selectTab(2); containerCtrl.selectTab(0)">Dashboards</a>
+								<a href="#dashboards" ng-click="itemCtrl.getItems('Dashboards'); panel.selectTab(2); containerCtrl.selectTab(0)">Dashboards</a>
 							</li>
 							<li ng-class="{active: panel.isSelected(3)}">
-								<a href="#workflows" ng-click="itemCtrl.setCategory('Workflows'); panel.selectTab(3); containerCtrl.selectTab(0)">Workflows</a>
+								<a href="#workflows" ng-click="itemCtrl.getItems('Workflows'); panel.selectTab(3); containerCtrl.selectTab(0)">Workflows</a>
 							</li>
 							<li ng-class="{active: panel.isSelected(4)}">
-								<a href="#activities" ng-click="itemCtrl.setCategory('Activities'); panel.selectTab(4); containerCtrl.selectTab(0)">Activities</a>
+								<a href="#activities" ng-click="itemCtrl.getItems('Activities'); panel.selectTab(4); containerCtrl.selectTab(0)">Activities</a>
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -60,9 +60,9 @@
 			</div>
 			<div class="container">				
 				<div class="row" ng-show="containerCtrl.isSelected(0)" ng-cloak>		
-					<div class="col-xs-6 col-md-3" ng-repeat="item in items" ng-hide="(category != '') && (item.category != category)">
+					<div class="col-xs-6 col-md-3" ng-repeat="item in items">
 						<div class="thumbnail">
-							<a ng-click="itemCtrl.setItem(item.name); containerCtrl.selectTab(1)">
+							<a ng-click="itemCtrl.getItem(item.name); containerCtrl.selectTab(1)">
 								<img style="min-width : 100px; min-height : 100px; max-width : 100px; max-height : 100px" data-ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg' onerror="this.src='/img/no-img.jpg'"/>
 							</a>
 							<div class="caption">
@@ -76,7 +76,7 @@
 				</div>	
 				
 				<div class="row" ng-show="containerCtrl.isSelected(1)" ng-cloak>
-					<div class="panel panel-default" ng-repeat="item in items" ng-show="item.name == name">
+					<div class="panel panel-default" ng-repeat="item in items">
 						<div class="panel-heading">
 							<h3> {{item.name}} </h3>	
 						</div>
@@ -267,30 +267,42 @@
 					}
 				});
 				
-				app.controller('ItemController',['$scope', '$http', function($scope, $http){	
-					$scope.category = '';  
-					$scope.name = '';
+				app.controller('ItemController',['$scope', '$http', function($scope, $http){	  
 					$scope.items = [];
-
+					$scope.defaultItems = [];	
 					this.init = function(){
 						$http.get('/getPackageJSON').success(function(data){
 						// $.get('/getPackageJSON', function(data){	
 							$scope.items = data;
+							$scope.defaultItems = data;
 						});
 					};
 
 					this.init();
 						
-					this.setCategory = function(category){
-						if(category == 'All'){
-							$scope.category = '';
+					this.getItems = function(category){
+						if (category == 'All'){
+							$scope.items = $scope.defaultItems;
+						}						
+						else {
+							$scope.items = [];
+							for(var index = 0; index < $scope.defaultItems.length; index++){
+								var item = $scope.defaultItems[index];
+								if(item.category == category){
+									$scope.items.push(item);											
+								}
+							}
 						}
-						else
-							$scope.category = category;
 					};
-
-					this.setItem = function(name){
-						$scope.name = name;
+					
+					this.getItem = function(name){
+						$scope.items = [];
+						for(var index = 0; index < $scope.defaultItems.length; index++){
+							var item = $scope.defaultItems[index];
+							if(item.name == name){
+								$scope.items.push(item);
+							}
+						}
 					};
 				}]);
 				angular.bootstrap(document,['gallery']);

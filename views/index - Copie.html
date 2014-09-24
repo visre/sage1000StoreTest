@@ -273,6 +273,7 @@
 						var ctrl = this;
 						ctrl.items = [];
 						$http.get('/getPackageJSON').success(function(data){
+						// $.get('/getPackageJSON', function(data){	
 							ctrl.items = data;
 						});
 					};
@@ -283,6 +284,8 @@
 						var ctrl = this;
 						ctrl.items = [];
 						$http.get('/getPackageJSON').success(function(data){
+						// $.get('/getPackageJSON', function(data){	
+							JSON.stringify(data);	
 							if (category == 'All'){
 								ctrl.items = data;
 							}
@@ -301,6 +304,8 @@
 						var ctrl = this;
 						ctrl.items = [];
 						$http.get('/getPackageJSON').success(function(data){
+						// $.get('/getPackageJSON', function(data){
+							JSON.stringify(data);	
 							for(var index = 0; index < data.length; index++){
 								var item = data[index];
 								if(item.name == name){

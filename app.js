@@ -83,9 +83,10 @@ app.get('/', function(req, res){
 	res.end();
 });	
 
+
 app.get('/getPackageJSON', function(req, res){
-	res.set("Connection", "close");
 	jf.readFile(__dirname + '/databases/packages.json', function (err, obj){
+		res.set("Connection", "close");
 		res.send(obj);
 	});
 });

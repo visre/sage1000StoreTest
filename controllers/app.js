@@ -18,7 +18,8 @@
 		this.init = function(){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('/getPackageJSON').success(function(data){
+			// $http.get('/getPackageJSON').success(function(data){
+			$.get('/getPackageJSON', function(data){	
 				ctrl.items = data;
 			});
 		};
@@ -28,7 +29,8 @@
 		this.getItems = function(category){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('/getPackageJSON').success(function(data){
+			// $http.get('/getPackageJSON').success(function(data){
+			$.get('/getPackageJSON', function(data){
 				if (category == 'All'){
 					ctrl.items = data;
 				}
@@ -46,7 +48,8 @@
 		this.getItem = function(name){
 			var ctrl = this;
 			ctrl.items = [];
-			$http.get('/getPackageJSON').success(function(data){
+			// $http.get('/getPackageJSON').success(function(data){
+			$.get('/getPackageJSON', function(data){
 				for(var index = 0; index < data.length; index++){
 					var item = data[index];
 					if(item.name == name){
