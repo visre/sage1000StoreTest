@@ -227,6 +227,31 @@
 			</nav>
 		</div>
 		<script>
+			var referrer = document.referrer;
+			if (referrer.length == 0){
+				$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
+			}
+			
+			if (referrer.length == 0){
+				$(".thumbButton").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 							
+			} else {
+				$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
+			}
+
+			if (referrer.length == 0){
+				$(".thumbButton2").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 									
+			} else {
+				$(".thumbButton2").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
+			}
+
+			$(function(){				
+				$.getJSON( "http://www.telize.com/jsonip", function(data){
+					if(data.ip == '193.30.141.1' || data.ip == '193.30.141.2'){
+						$('#addproduct').attr('class','ng-show');
+					}
+				});
+			});
+			
 			(function(){
 				var app = angular.module('gallery',[]);
 
@@ -287,31 +312,6 @@
 				}]);
 				angular.bootstrap(document,['gallery']);
 			})();
-			
-			var referrer = document.referrer;
-			if (referrer.length == 0){
-				$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
-			}
-			
-			if (referrer.length == 0){
-				$(".thumbButton").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 							
-			} else {
-				$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
-			}
-
-			if (referrer.length == 0){
-				$(".thumbButton2").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/product/download?' + $(this).attr("name") + '">download this item</a>')}); 									
-			} else {
-				$(".thumbButton2").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/product/install?' + $(this).attr("name") + '">install this item</a>')});	
-			}
-
-			$(function(){				
-				$.getJSON( "http://www.telize.com/jsonip", function(data){
-					if(data.ip == '193.30.141.1' || data.ip == '193.30.141.2'){
-						$('#addproduct').attr('class','ng-show');
-					}
-				});
-			});
 		</script>		
 		<script type="application/javascript" src="/javascripts/bootstrap.file-input.js"></script>
 		<script type="application/javascript" src="/javascripts/jssor.core.js"></script>
