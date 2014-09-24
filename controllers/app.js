@@ -49,7 +49,7 @@
 				for(var index = 0; index < data.length; index++){
 					var item = data[index];
 					if(item.name == name){
-						$scope.items.push(item);
+						ctrl.items.push(item);
 					}
 				}
 			});	
