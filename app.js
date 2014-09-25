@@ -23,6 +23,17 @@ var packages_folder = __dirname + '/databases/packages/';
 app.use(express.static(__dirname + '/public'));
 app.use("/databases", express.static(__dirname + '/databases'));
 app.use("/controllers", express.static(__dirname + '/controllers'));
+
+app.use(function(req, res, next){
+	res.set("Connection", "close");
+	next();
+});
+
+app.use("/gallery", function(req, res, next){
+	res.set("Connection", "close");
+	next();
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -69,7 +80,8 @@ app.get('/gallery/product/install', function(req, res){
     res.set("Connection", "close");
     res.contentType('application/json');
 	var adresse = { 
-		"blobUrl" : '/product/download?' + item
+		"name" : item,
+		"blobUrl" : '/gallery/product/download?' + item
 	};
 	res.end(JSON.stringify(adresse));
 });
@@ -185,11 +197,14 @@ var server = app.listen(81, function() {
     console.log('Listening on port %d', server.address().port);
 });
 
-/*server.on('connection', function(socket){
+server.on('connection', function(socket){
 	console.log("connect");
+	socket.on('close', function(){
+		console.log("connection closed");
+	});
 	// socket.setKeepAlive(false,[0]);
-	socket.setTimeout(2000, function(){
-		socket.destroy();
-	});*/
-// });
+	// socket.setTimeout(1500, function(){
+	// 	socket.destroy();
+	// });
+});
 module.exports = app;

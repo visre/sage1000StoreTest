@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-controller="ItemController as itemCtrl" ng-init="init()"> 
     <head> 	
-    	<link rel="stylesheet" type="text/css" href="/gallery/stylesheets/bootstrap.css" />
+    	<link rel="stylesheet" type="text/css" href="https://gallerie.blob.core.windows.net/packages/bootstrap.css"/>
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> 
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">	
 		<script type="application/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -63,7 +63,7 @@
 					<div class="col-xs-6 col-md-3" ng-repeat="item in items" ng-hide="(category != '') && (item.category != category)">
 						<div class="thumbnail">
 							<a ng-click="itemCtrl.setItem(item.name); containerCtrl.selectTab(1)">
-								<img style="min-width : 100px; min-height : 100px; max-width : 100px; max-height : 100px" data-ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg' onerror="this.src='/gallery/img/no-img.jpg'"/>
+								<img style="min-width : 100px; min-height : 100px; max-width : 100px; max-height : 100px" data-ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg' onerror="this.src='https://gallerie.blob.core.windows.net/packages/no-img.jpg'"/>
 							</a>
 							<div class="caption">
 								<p>{{item.name}}</p>
@@ -81,7 +81,7 @@
 							<h3> {{item.name}} </h3>	
 						</div>
 						<div class="panel-body">
-							<img width='20%' align='left' style='margin-right:10px' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg' onerror="this.src='/gallery/img/no-img.jpg'"/>					
+							<img width='20%' align='left' style='margin-right:10px' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg' onerror="this.src='https://gallerie.blob.core.windows.net/packages/no-img.jpg'"/>					
 							<p>{{item.description}}</p>
 							<p>
 								<div class="thumbButton2" name="{{item.link}}"></div>
@@ -91,7 +91,7 @@
 					<div class="col-sm-6 col-md-5 col-md-offset-3 border-top-radius">
 						<div id="slider2_container" style="position: relative; top: 0px; left: 0px; width: 150px; height: 100px; overflow: hidden; ">
 					        <!-- Slides Container -->
-					        <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
+					        <!-- <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
 					            <div>
 					                <img u="image" src="/gallery/img/lazyfonz1.png" />
 					                <img u="thumb" src="/gallery/img/lazyfonz1.png" />
@@ -112,7 +112,7 @@
 					                <img u="image" src="/gallery/img/lazyfonz5.png" />
 					                <img u="thumb" src="/gallery/img/lazyfonz5.png" />
 					            </div>
-					        </div>
+					        </div> -->
 					        
 					        <!-- ThumbnailNavigator Skin Begin -->
 					        <div u="thumbnavigator" class="jssort03" style="position: absolute; width: 150px; height: 20px; left:0px; bottom: 0px;">
@@ -297,9 +297,9 @@
 			})();
 		</script>		
 		<script type="application/javascript" src="/gallery/javascripts/bootstrap.file-input.js"></script>
-		<script type="application/javascript" src="/gallery/javascripts/jssor.core.js"></script>
-	    <script type="application/javascript" src="/gallery/javascripts/jssor.utils.js"></script>
-	    <script type="application/javascript" src="/gallery/javascripts/jssor.slider.js"></script>
-	    <script type="application/javascript" src="/gallery/javascripts/sliderConfig.js"></script>
+		<script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/jssor.core.js"></script>
+	    <script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/jssor.utils.js"></script>
+	    <script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/jssor.slider.js"></script>
+	    <script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/sliderConfig.js"></script>
     </body>
 </html>
