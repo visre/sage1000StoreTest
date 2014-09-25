@@ -1,0 +1,4 @@
+jQuery(document).ready(function($){var options={$AutoPlay:true,$AutoPlaySteps:1,$AutoPlayInterval:4000,$PauseOnHover:1,$ArrowKeyNavigation:true,$SlideDuration:500,$MinDragOffsetToSlide:20,$SlideSpacing:0,$DisplayPieces:1,$ParkingPosition:0,$UISearchMode:1,$PlayOrientation:1,$DragOrientation:3,$ThumbnailNavigatorOptions:{$Class:$JssorThumbnailNavigator$,$ChanceToShow:2,$ActionMode:1,$AutoCenter:3,$Lanes:1,$SpacingX:3,$SpacingY:3,$DisplayPieces:9,$ParkingPosition:260,$Orientation:1,$DisableDrag:false}};var jssor_slider2=new $JssorSlider$("slider2_container",options);function ScaleSlider(){var parentWidth=jssor_slider2.$Elmt.parentNode.clientWidth;if(parentWidth)
+jssor_slider2.$SetScaleWidth(Math.min(parentWidth,600));else
+window.setTimeout(ScaleSlider,30);}
+ScaleSlider();if(!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)){$(window).bind('resize',ScaleSlider);}});

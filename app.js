@@ -40,7 +40,7 @@ function Init(){
 	});
 }
 
-app.get('/product/download', function(req, res){
+app.get('/gallery/product/download', function(req, res){
 	var item = url.parse(req.url).query;
 	var filePath = packages_folder + item + '.zip';
 	blobService.getBlobToFile(package_container, item + '.zip', filePath, function(error, result, response){
@@ -64,13 +64,9 @@ app.get('/product/download', function(req, res){
 	});			
 });
 
-
-
-app.get('/product/install', function(req, res){
+app.get('/gallery/product/install', function(req, res){
     var item = url.parse(req.url).query;
-    var returnHeaders = {};
-    returnHeaders['Connection'] = "close";
-	res.writeHead(200, returnHeaders); 
+    res.set("Connection", "close");
     res.contentType('application/json');
 	var adresse = { 
 		"blobUrl" : '/product/download?' + item
@@ -84,15 +80,16 @@ app.get('/', function(req, res){
 });	
 
 
-app.get('/getPackageJSON', function(req, res){
+app.get('/gallery/getPackageJSON', function(req, res){
+	res.set("Connection", "close");
+
 	jf.readFile(__dirname + '/databases/packages.json', function (err, obj){
-		res.set("Connection", "close");
-		res.send(obj);
+		res.send(obj);	
 	});
 });
 
 
-app.post('/addProduct', function(req, res){
+app.post('/gallery/addProduct', function(req, res){
 	//1 - Lease the blob
 	//2 - Get the blob & read
 	//3 - Write the product
@@ -110,7 +107,7 @@ app.post('/addProduct', function(req, res){
 				console.log("read packages.json");
 				for(var i = 0; i < obj.length; i++){
 					if(obj[i]['link'] === name){
-						res.render('failure.html');
+						res.redirect(res.render('failure.html'),"success.html");
 					}
 				}
 					
@@ -184,7 +181,7 @@ app.post('/addProduct', function(req, res){
 
 
 Init();
-var server = app.listen(3000, function() {
+var server = app.listen(81, function() {
     console.log('Listening on port %d', server.address().port);
 });
 
