@@ -91,7 +91,7 @@
 					<div class="col-sm-6 col-md-5 col-md-offset-3 border-top-radius">
 						<div id="slider2_container" style="position: relative; top: 0px; left: 0px; width: 150px; height: 100px; overflow: hidden; ">
 					        <!-- Slides Container -->
-					        <!-- <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
+					        <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
 					            <div>
 					                <img u="image" src="/gallery/img/lazyfonz1.png" />
 					                <img u="thumb" src="/gallery/img/lazyfonz1.png" />
@@ -111,6 +111,29 @@
 					            <div>
 					                <img u="image" src="/gallery/img/lazyfonz5.png" />
 					                <img u="thumb" src="/gallery/img/lazyfonz5.png" />
+					            </div>
+					        </div>
+					        
+					     <!--     <div u="slides" style="position: center; width: 150px; height: 100px; overflow: hidden;">
+					            <div>
+					                <img u="image" src="https://gallerie.blob.core.windows.net/images/lazyfonz1.png" />
+					                <img u="thumb" src="https://gallerie.blob.core.windows.net/images/lazyfonz1.png" />
+					            </div>
+								<div>
+					                <img u="image" src="https://gallerie.blob.core.windows.net/images/lazyfonz2.png" />
+					                <img u="thumb" src="https://gallerie.blob.core.windows.net/images/lazyfonz2.png" />
+					            </div>
+					            <div>
+					                <img u="image" src="https://gallerie.blob.core.windows.net/images/lazyfonz3.png" />
+					                <img u="thumb" src="https://gallerie.blob.core.windows.net/images/lazyfonz3.png" />
+					            </div>
+					            <div>
+					                <img u="image" src="https://gallerie.blob.core.windows.net/images/lazyfonz4.png" />
+					                <img u="thumb" src="https://gallerie.blob.core.windows.net/images/lazyfonz4.png" />
+					            </div>
+					            <div>
+					                <img u="image" src="https://gallerie.blob.core.windows.net/images/lazyfonz5.png" />
+					                <img u="thumb" src="https://gallerie.blob.core.windows.net/images/lazyfonz5.png" />
 					            </div>
 					        </div> -->
 					        
@@ -187,7 +210,7 @@
 				<div class="row" ng-show="containerCtrl.isSelected(2)" ng-cloak>
 					<h1>Add a product</h1>
 					<div class="col-sm-6 col-md-4 col-md-offset-4 border-top-radius">
-						<form method="POST" enctype="multipart/form-data" action="/addProduct">
+						<form method="POST" enctype="multipart/form-data" action="/gallery/addProduct">
 							<fieldset>
 								<div class="form-group">
 									<label for="inputName">Name</label>
@@ -228,21 +251,19 @@
 		</div>
 		<script>
 			var referrer = document.referrer;
-			if (referrer.length == 0){
-				$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)" ng-show="false">Add a product</a>');
-			}
-			
-			if (referrer.length == 0){
-				$(".thumbButton").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?' + $(this).attr("name") + '">download this item</a>')}); 							
-			} else {
-				$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?' + $(this).attr("name") + '">install this item</a>')});	
-			}
 
-			if (referrer.length == 0){
-				$(".thumbButton2").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?' + $(this).attr("name") + '">download this item</a>')}); 									
-			} else {
+			if ((referrer.length > 0) && (referrer.indexOf("/server/portal.l1000") > -1)){
+				$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?' + $(this).attr("name") + '">install this item</a>')});	
+
 				$(".thumbButton2").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?' + $(this).attr("name") + '">install this item</a>')});	
 			}
+			else{
+				$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)">Add a product</a>');
+				
+				$(".thumbButton").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?' + $(this).attr("name") + '">download this item</a>')}); 	
+
+				$(".thumbButton2").each(function(){$(this).append('<a name="download" class="btn btn-xs btn-success" href="/gallery/product/download?' + $(this).attr("name") + '">download this item</a>')}); 	
+			}						
 
 			$(function(){				
 				$.getJSON( "http://www.telize.com/jsonip", function(data){
@@ -297,9 +318,9 @@
 			})();
 		</script>		
 		<script type="application/javascript" src="/gallery/javascripts/bootstrap.file-input.js"></script>
-		<script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/jssor.core.js"></script>
-	    <script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/jssor.utils.js"></script>
-	    <script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/jssor.slider.js"></script>
-	    <script type="application/javascript" src="https://gallerie.blob.core.windows.net/packages/sliderConfig.js"></script>
+		<script type="application/javascript" src="/gallery/javascripts/jssor.core.js"></script>
+	    <script type="application/javascript" src="/gallery/javascripts/jssor.utils.js"></script>
+	    <script type="application/javascript" src="/gallery/javascripts/jssor.slider.js"></script>
+	    <script type="application/javascript" src="/gallery/javascripts/sliderConfig.js"></script>
     </body>
 </html>

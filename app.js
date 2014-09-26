@@ -20,19 +20,25 @@ var images_container = 'images';
 var blobService = azure.createBlobService(storage_account,gallerieKey);
 var packages_folder = __dirname + '/databases/packages/';
 
+app.all('*', function(req, res, next){
+	res.set("Connection", "close");
+	next();
+});
+
 app.use(express.static(__dirname + '/public'));
 app.use("/databases", express.static(__dirname + '/databases'));
 app.use("/controllers", express.static(__dirname + '/controllers'));
 
-app.use(function(req, res, next){
-	res.set("Connection", "close");
-	next();
-});
+// app.use(function(req, res, next){
+// 	console.log("catch2!");
+// 	res.set("Connection", "close");
+// 	next();
+// });
 
-app.use("/gallery", function(req, res, next){
-	res.set("Connection", "close");
-	next();
-});
+// app.use("/gallery", function(req, res, next){
+// 	res.set("Connection", "close");
+// 	next();
+// });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -70,6 +76,7 @@ app.get('/gallery/product/download', function(req, res){
 			});			
 		}
 		else{
+			res.render("unfind.html");
 			console.log(error);
 		}
 	});			
@@ -100,7 +107,6 @@ app.get('/gallery/getPackageJSON', function(req, res){
 	});
 });
 
-
 app.post('/gallery/addProduct', function(req, res){
 	//1 - Lease the blob
 	//2 - Get the blob & read
@@ -110,33 +116,43 @@ app.post('/gallery/addProduct', function(req, res){
 	//6 - Release the blob
 	blobService.getBlobToFile(index_container, 'packages.json', __dirname + '/databases/packages.json', function(error, result, response){
 		var form = new formidable.IncomingForm();
-		console.log("start post");
 		form.parse(req, function(err, fields, files){
-			console.log("form passed");
 			var name = fields.inputName.replace(' ', '');
 			var product = {"type" : "product", "name" : fields.inputName, "link" : name, "description" : fields.inputDescription, "price" : 0, "file" : name, "package" : name, "category" : fields.inputCategory, "countView" : 0, "countOrder" : 0};
 			jf.readFile(__dirname + '/databases/packages.json', function (err, obj){
-				console.log("read packages.json");
 				for(var i = 0; i < obj.length; i++){
 					if(obj[i]['link'] === name){
-						res.redirect(res.render('failure.html'),"success.html");
+						res.redirect(res.render('failure.html'));
 					}
 				}
 					
 				obj.push(product);
 				jf.writeFile(__dirname + '/databases/packages.json', obj, function(err){
 					if(!err){
-						console.log("write ok!");
 						blobService.createBlockBlobFromFile(index_container, "packages.json", __dirname + '/databases/packages.json', function(){});
 					}
 					else{
 						console.log(err);
 					}
 				});
+
+				// fs.writeFile("name" + ".zip")
+				var readStream = fs.createReadStream(files.inputImage.path);
+				var writeStream = fs.createWriteStream(__dirname + '/public/gallery/img/' + name + ".jpg");
+				readStream.pipe(writeStream);
+				// fs.writeFile(__dirname + '/public/gallery/img/' + name + ".jpg", stream, function(err){
+				// 	console.log("img ok!");
+				// });
+
+				readStream = fs.createReadStream(files.inputPackage.path);
+				writeStream = fs.createWriteStream(__dirname + '/databases/packages/' + name + ".zip");
+				readStream.pipe(writeStream);
+				// fs.writeFile(__dirname + '/databases/packages/' + name + ".zip", stream, function(err){
+				// 	console.log("package ok!");
+				// });
+
 				blobService.createBlockBlobFromFile(package_container, name + ".zip", files.inputPackage.path, function(){
-					console.log("create blob package");
 					blobService.createBlockBlobFromFile(images_container, name + ".jpg", files.inputImage.path, function(){
-						console.log("create blob jpg");
 						// res.set("Connection", "close");	
 						res.render('success.html');
 					});
@@ -197,14 +213,14 @@ var server = app.listen(81, function() {
     console.log('Listening on port %d', server.address().port);
 });
 
-server.on('connection', function(socket){
-	console.log("connect");
-	socket.on('close', function(){
-		console.log("connection closed");
-	});
-	// socket.setKeepAlive(false,[0]);
-	// socket.setTimeout(1500, function(){
-	// 	socket.destroy();
-	// });
-});
+// server.on('connection', function(socket){
+// 	console.log("connect");
+// 	socket.on('close', function(){
+// 		console.log("connection closed");
+// 	});
+// 	socket.setKeepAlive(false,[0]);
+// 	socket.setTimeout(1500, function(){
+// 		socket.destroy();
+// 	});
+// });
 module.exports = app;
