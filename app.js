@@ -91,7 +91,6 @@ app.get('/gallery/product/download', function(req, res){
 });
 
 app.get('/gallery/product/install', function(req, res){
-	console.log('test');
 	var adresse = { 
 		"name" : req.query.name,
 		"blobUrl" : '/gallery/product/download?' + req.query.name,
