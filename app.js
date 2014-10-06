@@ -8,8 +8,12 @@ var formidable = require('formidable');
 var fs = require('fs');
 var jf = require('jsonfile');
 var path = require('path');
+var request = require('request');
 var url = require('url');
 var util = require('util');
+var http = require('http');
+var unirest = require('unirest');
+
 
 var storage_account = 'gallerie';
 var gallerieKey = 'SiQVY98VhO+NI1m6jfBMgB1M/00geM/puCgpMpRvsBSUz0H/xcgF77Wx9SiD7buJFvXZ9NTvyRNvf200CNT6Kg==';
@@ -43,12 +47,16 @@ app.use("/controllers", express.static(__dirname + '/controllers'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.set('views', __dirname + '/views');
-app.engine('html', require('ejs').renderFile);
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'ejs');
+// app.engine('html', require('ejs').renderFile);
+
+app.set('views', __dirname + '/views/');
+app.set('view engine', 'ejs');
 
 app.get('/gallery', function (req, res){
 	res.set("Connection", "close");	
-	res.render('index.html');
+	res.render('index');
 });
 
 function Init(){
@@ -76,28 +84,23 @@ app.get('/gallery/product/download', function(req, res){
 			});			
 		}
 		else{
-			res.render("unfind.html");
+			res.render('unfind');
 			console.log(error);
 		}
 	});			
 });
 
 app.get('/gallery/product/install', function(req, res){
-    var item = url.parse(req.url).query;
-    res.set("Connection", "close");
-    res.contentType('application/json');
+	console.log('test');
 	var adresse = { 
-		"name" : item,
-		"blobUrl" : '/gallery/product/download?' + item
+		"name" : req.query.name,
+		"blobUrl" : '/gallery/product/download?' + req.query.name,
+		"category" : req.query.category
 	};
 	res.end(JSON.stringify(adresse));
+
+	// res.end(JSON.stringify(adresse));
 });
-
-app.get('/', function(req, res){
-	res.set("Connection", "close");	
-	res.end();
-});	
-
 
 app.get('/gallery/getPackageJSON', function(req, res){
 	res.set("Connection", "close");
@@ -122,7 +125,7 @@ app.post('/gallery/addProduct', function(req, res){
 			jf.readFile(__dirname + '/databases/packages.json', function (err, obj){
 				for(var i = 0; i < obj.length; i++){
 					if(obj[i]['link'] === name){
-						res.redirect(res.render('failure.html'));
+						res.redirect(res.render('failure'));
 					}
 				}
 					
@@ -154,7 +157,7 @@ app.post('/gallery/addProduct', function(req, res){
 				blobService.createBlockBlobFromFile(package_container, name + ".zip", files.inputPackage.path, function(){
 					blobService.createBlockBlobFromFile(images_container, name + ".jpg", files.inputImage.path, function(){
 						// res.set("Connection", "close");	
-						res.render('success.html');
+						res.render('success');
 					});
 				});						
 			});
@@ -217,10 +220,6 @@ var server = app.listen(81, function() {
 // 	console.log("connect");
 // 	socket.on('close', function(){
 // 		console.log("connection closed");
-// 	});
-// 	socket.setKeepAlive(false,[0]);
-// 	socket.setTimeout(1500, function(){
-// 		socket.destroy();
 // 	});
 // });
 module.exports = app;
