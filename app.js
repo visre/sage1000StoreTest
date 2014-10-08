@@ -12,7 +12,6 @@ var request = require('request');
 var url = require('url');
 var util = require('util');
 var http = require('http');
-var unirest = require('unirest');
 
 
 var storage_account = 'gallerie';
@@ -47,12 +46,9 @@ app.use("/controllers", express.static(__dirname + '/controllers'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.set('views', __dirname + '/views');
-// app.set('view engine', 'ejs');
-// app.engine('html', require('ejs').renderFile);
-
 app.set('views', __dirname + '/views/');
-app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 app.get('/gallery', function (req, res){
 	res.set("Connection", "close");	

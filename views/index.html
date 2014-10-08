@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-controller="ItemController as itemCtrl" ng-init="init()"> 
     <head> 	
+    	<meta charset="UTF-8">
     	<link rel="stylesheet" type="text/css" href="/gallery/stylesheets//bootstrap.css"/>
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> 
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">	
@@ -82,7 +83,7 @@
 							<img width='20%' align='left' style='margin-right:10px' ng-src='https://gallerie.blob.core.windows.net/images/{{item.file}}.jpg' onerror="this.src='https://gallerie.blob.core.windows.net/packages/no-img.jpg'"/>					
 							<p>{{item.description}}</p>
 							<p>
-								<div class="thumbButton2" name="{{item.link}}" id="{{item.category}}"></div>
+								<div class="thumbButton2" name="item.link" id="item.category"></div>
 							</p>
 						</div>
 					</div>	
@@ -240,6 +241,21 @@
 						</form>
 					</div>
 				</div>
+
+				<div class="row" ng-show="containerCtrl.isSelected(3)" ng-cloak> <!-- containerCtrl.isSelected(3) -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3> Installation de {{itemInstalled}} </h3>	
+						</div>
+						<div class="panel-body">
+							<p ng-show="resultInstall != ''">{{resultInstall}}</p>
+							<img class="center-block" ng-show="resultInstall == ''" ng-src="https://gallerie.blob.core.windows.net/packages/loading.gif"></img>
+							<div style="margin-top: 10px;">
+								<a ng-click="containerCtrl.selectTab(0)">Retourner à la galerie</a>
+							</div>		
+						</div>
+					</div>
+				</div>
 			</div>
 			<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 				<div class="container">
@@ -251,9 +267,9 @@
 			var referrer = document.referrer;
 
 			if ((referrer.length > 0) && ((referrer.indexOf("/server/portal.l1000") > -1) || (referrer.indexOf("/gallery/product/install") >-1))){
-				$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?name=' + $(this).attr("name") + '&category=' + $(this).attr("id") + '">install this item</a>')});	
+				$(".thumbButton").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" ng-click="containerCtrl.getInstall(item.link, item.category); containerCtrl.selectTab(3)">install this item</a>')});
 
-				$(".thumbButton2").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" href="/gallery/product/install?name=' + $(this).attr("name") + '&category=' + $(this).attr("id") + '">install this item</a>')});	
+				$(".thumbButton2").each(function(){$(this).append('<a name="install" class="btn btn-xs btn-danger" ng-click="containerCtrl.getInstall(item.link, item.category); containerCtrl.selectTab(3)">install this item</a>')});
 			}
 			else{
 				$(".addProduct").append('<a id="addproduct" ng-click="containerCtrl.selectTab(2)">Add a product</a>');
@@ -274,8 +290,10 @@
 			(function(){
 				var app = angular.module('gallery',[]);
 
-				app.controller('ContainerController', function(){
-					this.tab = 0;		
+				app.controller('ContainerController', ['$scope', '$http', function($scope, $http){
+					this.tab = 0;	
+					$scope.resultInstall = "";
+					$scope.itemInstalled = "";	
 					
 					this.selectTab = function(setTab){
 						this.tab = setTab;
@@ -284,7 +302,19 @@
 					this.isSelected = function(checkTab){
 						return this.tab == checkTab;
 					}
-				});
+
+					this.getInstall = function(name, category){
+						$scope.resultInstall = "";
+						$scope.itemInstalled = name;
+
+						$http.get('/gallery/product/install?name=' + name + '&category=' + category).success(function(data){
+							$scope.resultInstall = data.Reason;
+						}).error(function(data){
+							$scope.resultInstall = "Installation échouée";
+							$scope.itemInstalled = name;
+						});
+					};
+				}]);
 				
 				app.controller('ItemController',['$scope', '$http', function($scope, $http){	
 					$scope.category = '';  
