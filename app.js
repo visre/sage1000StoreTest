@@ -32,17 +32,6 @@ app.use(express.static(__dirname + '/public'));
 app.use("/databases", express.static(__dirname + '/databases'));
 app.use("/controllers", express.static(__dirname + '/controllers'));
 
-// app.use(function(req, res, next){
-// 	console.log("catch2!");
-// 	res.set("Connection", "close");
-// 	next();
-// });
-
-// app.use("/gallery", function(req, res, next){
-// 	res.set("Connection", "close");
-// 	next();
-// });
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -93,8 +82,6 @@ app.get('/gallery/product/install', function(req, res){
 		"category" : req.query.category
 	};
 	res.end(JSON.stringify(adresse));
-
-	// res.end(JSON.stringify(adresse));
 });
 
 app.get('/gallery/getPackageJSON', function(req, res){
@@ -114,16 +101,62 @@ app.post('/gallery/addProduct', function(req, res){
 	//6 - Release the blob
 	blobService.getBlobToFile(index_container, 'packages.json', __dirname + '/databases/packages.json', function(error, result, response){
 		var form = new formidable.IncomingForm();
+		var captures = [];
+		var readStream;
+		var writeStream;
+		var extImg = "";
+		var applications = [];
+		form.multiples = true;
+
+		//Récupération du multiple select applications
+	    form.on('field', function(field, value) {
+			if (field === "inputSelectApplication")
+		        applications.push(value);
+	    });
+
+	    //Récupération des captures et upload dans azure
 		form.parse(req, function(err, fields, files){
-			var name = fields.inputName.replace(' ', '');
-			var product = {"type" : "product", "name" : fields.inputName, "link" : name, "description" : fields.inputDescription, "price" : 0, "file" : name, "package" : name, "category" : fields.inputCategory, "countView" : 0, "countOrder" : 0};
+			var name = fields.inputName.replace(/\s+/g, '').replace(/\'+/g,'').replace(/(é|è|ê)/g, 'e').replace(/(à|â)/g,'a').toLowerCase();
+			if (files.inputCaptures.length > 0){
+				for (var index in files.inputCaptures){
+
+					if (files.inputCaptures[index].type === 'image/jpeg'){
+						extImg = ".jpg";
+					}
+					else if(files.inputCaptures[index].type === 'image/png'){
+						extImg = ".png";
+					}
+					captures.push({"capture" : name + '-' + index + extImg});
+					readStream = fs.createReadStream(files.inputCaptures[index].path);
+					writeStream = fs.createWriteStream(__dirname + '/public/gallery/img/' + name + '-' + index + extImg);
+					readStream.pipe(writeStream);
+				};
+			}
+
+			if (files.inputImage.path !== ""){
+				readStream = fs.createReadStream(files.inputImage.path);
+				if (files.inputImage.type === 'image/jpeg'){
+					extImg = ".jpg";
+				}
+				else if(files.inputImage.type === 'image/png'){
+					extImg = ".png";
+				}
+				writeStream = fs.createWriteStream(__dirname + '/public/gallery/img/' + name + extImg);
+				readStream.pipe(writeStream);
+			}
+
+			readStream = fs.createReadStream(files.inputPackage.path);
+			writeStream = fs.createWriteStream(__dirname + '/databases/packages/' + name + ".zip");
+			readStream.pipe(writeStream);
+
+			var product = {"type" : "product", "name" : fields.inputName, "link" : name, "description" : fields.inputDescription, "price" : 0, "file" : name + extImg, "package" : name + ".zip", "category" : fields.inputCategory, "application" : applications,"captures": fields.inputCaptures, "countView" : 0, "countOrder" : 0, "captures": captures};
+
 			jf.readFile(__dirname + '/databases/packages.json', function (err, obj){
 				for(var i = 0; i < obj.length; i++){
-					if(obj[i]['link'] === name){
+					if(obj[i]['name'] === name){
 						res.redirect(res.render('failure'));
 					}
 				}
-					
 				obj.push(product);
 				jf.writeFile(__dirname + '/databases/packages.json', obj, function(err){
 					if(!err){
@@ -132,26 +165,10 @@ app.post('/gallery/addProduct', function(req, res){
 					else{
 						console.log(err);
 					}
-				});
-
-				// fs.writeFile("name" + ".zip")
-				var readStream = fs.createReadStream(files.inputImage.path);
-				var writeStream = fs.createWriteStream(__dirname + '/public/gallery/img/' + name + ".jpg");
-				readStream.pipe(writeStream);
-				// fs.writeFile(__dirname + '/public/gallery/img/' + name + ".jpg", stream, function(err){
-				// 	console.log("img ok!");
-				// });
-
-				readStream = fs.createReadStream(files.inputPackage.path);
-				writeStream = fs.createWriteStream(__dirname + '/databases/packages/' + name + ".zip");
-				readStream.pipe(writeStream);
-				// fs.writeFile(__dirname + '/databases/packages/' + name + ".zip", stream, function(err){
-				// 	console.log("package ok!");
-				// });
-
+				});	
+				
 				blobService.createBlockBlobFromFile(package_container, name + ".zip", files.inputPackage.path, function(){
-					blobService.createBlockBlobFromFile(images_container, name + ".jpg", files.inputImage.path, function(){
-						// res.set("Connection", "close");	
+					blobService.createBlockBlobFromFile(images_container, name + extImg, files.inputImage.path, function(){	
 						res.render('success');
 					});
 				});						
@@ -207,14 +224,8 @@ app.post('/gallery/addProduct', function(req, res){
 
 
 Init();
-var server = app.listen(81, function() {
+var server = app.listen(82, function() {
     console.log('Listening on port %d', server.address().port);
 });
 
-// server.on('connection', function(socket){
-// 	console.log("connect");
-// 	socket.on('close', function(){
-// 		console.log("connection closed");
-// 	});
-// });
 module.exports = app;

@@ -94,50 +94,5 @@
     "category": "Mobile Apps",
     "countView": 0,
     "countOrder": 0
-  },
-  {
-    "type": "product",
-    "name": "Dashboard Balance Agée Clients",
-    "link": "dashboardbalance",
-    "description": "Dashboard Balance Agée Clients",
-    "price": 0,
-    "file": "dashboardbalance",
-    "package": "dashboardbalance.zip",
-    "captures": [],
-    "category": "Dashboards",
-    "countView": 0,
-    "countOrder": 0
-  },
-  {
-    "type": "product",
-    "name": "Processus métier Gestion des BAP",
-    "link": "cpt_gestion_du_bap",
-    "description": "Processus métier Gestion des BAP",
-    "price": 0,
-    "file": "cpt_gestion_du_bap",
-    "package": "cpt_gestion_du_bap.zip",
-    "category": "Activities",
-    "captures": [],
-    "countView": 0,
-    "countOrder": 0
-  },
-  {
-    "type": "product",
-    "name": "test1",
-    "link": "test1",
-    "description": "test1",
-    "price": 0,
-    "file": "test1",
-    "package": "test1.zip",
-    "category": "Activities",
-    "application": [
-      "ndf",
-      "budget",
-      "immo",
-      "treso"
-    ],
-    "captures": [],
-    "countView": 0,
-    "countOrder": 0
   }
 ]
