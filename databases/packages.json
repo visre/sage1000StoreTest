@@ -85,7 +85,7 @@
   },
   {
     "type": "product",
-    "name": "Bon à payer pour Sage FRP Comptabilité",
+    "name": "Validation des bons à payer",
     "link": "mobvalidatebap",
     "description": "Bon à payer pour Sage FRP Comptabilité",
     "price": 0,
@@ -117,25 +117,6 @@
     "file": "cpt_gestion_du_bap",
     "package": "cpt_gestion_du_bap.zip",
     "category": "Activities",
-    "captures": [],
-    "countView": 0,
-    "countOrder": 0
-  },
-  {
-    "type": "product",
-    "name": "test1",
-    "link": "test1",
-    "description": "test1",
-    "price": 0,
-    "file": "test1",
-    "package": "test1.zip",
-    "category": "Activities",
-    "application": [
-      "ndf",
-      "budget",
-      "immo",
-      "treso"
-    ],
     "captures": [],
     "countView": 0,
     "countOrder": 0
