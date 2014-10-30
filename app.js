@@ -8,7 +8,6 @@ var formidable = require('formidable');
 var fs = require('fs');
 var jf = require('jsonfile');
 var path = require('path');
-var request = require('request');
 var url = require('url');
 var util = require('util');
 var http = require('http');
@@ -40,7 +39,6 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.get('/gallery', function (req, res){
-	res.set("Connection", "close");	
 	res.render('index');
 });
 
@@ -224,7 +222,7 @@ app.post('/gallery/addProduct', function(req, res){
 
 
 Init();
-var server = app.listen(83, function() {
+var server = app.listen(8080, function() {
     console.log('Listening on port %d', server.address().port);
 });
 
