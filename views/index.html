@@ -85,8 +85,8 @@
 		        </div>
 		    </div>
 			<div class="container">	
-				<div class="row" id="content" ng-show="containerCtrl.isSelected(0)" ng-cloak>	
-					<div bar2 class="mosaic-block bar2" ng-repeat="item in items" ng-hide="itemCtrl.hideItem(item)">
+				<div class="row" id="content" ng-show="containerCtrl.isSelected(0)" ng-cloak>
+					<div bar2 class="mosaic-block bar2 " ng-repeat="item in items" ng-hide="itemCtrl.hideItem(item)">
 						<a style="text-decoration:none;" class="mosaic-overlay" href="#">
 							<div class="details">
 								<h4>{{item.name}}</h4><br/>
@@ -99,7 +99,6 @@
 							</a>
 						</div>
 					</div>
-					<div class="clearfix"></div>
 				</div>	
 				
 				<div class="row" ng-show="containerCtrl.isSelected(1)" ng-cloak>
