@@ -10,8 +10,6 @@ var jf = require('jsonfile');
 var path = require('path');
 var url = require('url');
 var util = require('util');
-var http = require('http');
-
 
 var storage_account = 'gallerie';
 var gallerieKey = 'SiQVY98VhO+NI1m6jfBMgB1M/00geM/puCgpMpRvsBSUz0H/xcgF77Wx9SiD7buJFvXZ9NTvyRNvf200CNT6Kg==';
@@ -50,11 +48,11 @@ function Init(){
 
 app.get('/gallery/product/download', function(req, res){
 	var item = url.parse(req.url).query;
-	var filePath = packages_folder + item + '.zip';
-	blobService.getBlobToFile(package_container, item + '.zip', filePath, function(error, result, response){
+	var filePath = packages_folder + item + '.mob';
+	blobService.getBlobToFile(package_container, item + '.mob', filePath, function(error, result, response){
 		if(!error){
 		    var returnHeaders = {};
-			returnHeaders['Content-Disposition'] = 'attachment; filename="'+ item +'.zip"';
+			returnHeaders['Content-Disposition'] = 'attachment; filename="'+ item +'.mob"';
 			returnHeaders['Content-Type'] = 'application/zip';
 			returnHeaders['Connection'] = "close";
 			res.writeHead(200, returnHeaders); 
@@ -128,6 +126,7 @@ app.post('/gallery/addProduct', function(req, res){
 					readStream = fs.createReadStream(files.inputCaptures[index].path);
 					writeStream = fs.createWriteStream(__dirname + '/public/gallery/img/' + name + '-' + index + extImg);
 					readStream.pipe(writeStream);
+					blobService.createBlockBlobFromFile(images_container, name + '-' + index + extImg, files.inputCaptures[index].path, function(){});
 				};
 			}
 
@@ -144,7 +143,7 @@ app.post('/gallery/addProduct', function(req, res){
 			}
 
 			readStream = fs.createReadStream(files.inputPackage.path);
-			writeStream = fs.createWriteStream(__dirname + '/databases/packages/' + name + ".zip");
+			writeStream = fs.createWriteStream(__dirname + '/databases/packages/' + name + ".mob");
 			readStream.pipe(writeStream);
 
 			var product = {"type" : "product", "name" : fields.inputName, "link" : name, "description" : fields.inputDescription, "price" : 0, "file" : name + extImg, "package" : name + ".zip", "category" : fields.inputCategory, "application" : applications,"captures": fields.inputCaptures, "countView" : 0, "countOrder" : 0, "captures": captures};
@@ -165,7 +164,7 @@ app.post('/gallery/addProduct', function(req, res){
 					}
 				});	
 				
-				blobService.createBlockBlobFromFile(package_container, name + ".zip", files.inputPackage.path, function(){
+				blobService.createBlockBlobFromFile(package_container, name + ".mob", files.inputPackage.path, function(){
 					blobService.createBlockBlobFromFile(images_container, name + extImg, files.inputImage.path, function(){	
 						res.render('success');
 					});
@@ -222,7 +221,7 @@ app.post('/gallery/addProduct', function(req, res){
 
 
 Init();
-var server = app.listen(8080, function() {
+var server = app.listen(81, function() {
     console.log('Listening on port %d', server.address().port);
 });
 

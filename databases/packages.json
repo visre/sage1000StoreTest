@@ -124,40 +124,12 @@
   {
     "type": "product",
     "name": "Validation des engagements",
-    "link": "Validationdes engagements",
+    "link": "mobcommitments",
     "description": "Validation des engagements",
     "price": 0,
-    "file": "Validationdes engagements",
-    "package": "Validationdes engagements",
+    "file": "mobcommitments",
+    "package": "mobcommitments.zip",
     "category": "Mobile Apps",
-    "countView": 0,
-    "countOrder": 0
-  },
-  {
-    "type": "product",
-    "name": "test",
-    "link": "test",
-    "description": "test",
-    "price": 0,
-    "file": "test.jpg",
-    "package": "test.zip",
-    "category": "Activities",
-    "application": [
-      "admin",
-      "ndf",
-      "budget"
-    ],
-    "captures": [
-      {
-        "capture": "test-0.jpg"
-      },
-      {
-        "capture": "test-1.jpg"
-      },
-      {
-        "capture": "test-2.jpg"
-      }
-    ],
     "countView": 0,
     "countOrder": 0
   }

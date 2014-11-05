@@ -32,6 +32,7 @@
 
 			$http.get('/gallery/product/install?name=' + name + '&category=' + category).
 			success(function(data, status, headers, config){
+				alert(JSON.stringify(data));
 				$scope.resultInstall = data.Reason;
 			}).
 			error(function(data){
@@ -44,7 +45,7 @@
 			var res = false;
 			angular.forEach($scope.items, function(key,value){
 				angular.forEach(key.application, function(appKey, appValue){
-					if(appKey === app)
+					if((appKey === app)&&(key.category === category))
 						res = true;
 				});
 			});
@@ -75,7 +76,7 @@
 				angular.forEach(data, function(value,key){
 					angular.forEach(value.captures, function(captures, keyCap){
 						$scope.slides.push({
-							image : "/gallery/img/"+ captures.capture,
+							image : "https://gallerie.blob.core.windows.net/images/"+ captures.capture,
 							itemName : value.name
 						});
 					});						
