@@ -1,6 +1,19 @@
 <!DOCTYPE html>
-<html ng-controller="ItemController as itemCtrl" ng-init="init()"> 
+<!-- <html ng-controller="ItemController as itemCtrl" ng-init="init()">  -->
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-controller="ItemController as itemCtrl" ng-init="init()"> 
     <head> 	
+    	<!--[if lte IE 8]>
+	      <script>
+	        document.createElement('ng-include');
+	        document.createElement('ng-pluralize');
+	        document.createElement('ng-view');
+
+	        // Optionally these for CSS
+	        document.createElement('ng:include');
+	        document.createElement('ng:pluralize');
+	        document.createElement('ng:view');
+	      </script>
+	    <![endif]-->
     	<meta charset="UTF-8">
     	<link rel="stylesheet" type="text/css" href="/gallery/stylesheets/bootstrap.css"/>
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> 
@@ -86,7 +99,8 @@
 		    </div>
 			<div class="container">	
 				<div class="row" id="content" ng-show="containerCtrl.isSelected(0)" ng-cloak>
-					<div bar2 class="mosaic-block bar2 " ng-repeat="item in items" ng-hide="itemCtrl.hideItem(item)">
+					<!-- <div bar2 class="mosaic-block bar2 " ng-repeat="item in items | startFrom:currentPage*pageSize | limitTo:pageSize" ng-hide="itemCtrl.hideItem(item)"> -->
+						<div bar2 class="mosaic-block bar2 " ng-repeat="item in items" ng-hide="itemCtrl.hideItem(item)">
 						<a style="text-decoration:none;" class="mosaic-overlay" href="#">
 							<div class="details">
 								<h4>{{item.name}}</h4><br/>
@@ -99,6 +113,14 @@
 							</a>
 						</div>
 					</div>
+					<!-- <div class="clearfix"></div>
+						<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+				        Previous
+				    </button>
+				    {{currentPage+1}}/{{numberOfPages()}}
+				    <button ng-disabled="currentPage >= items.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+				        Next
+				    </button> -->
 				</div>	
 				
 				<div class="row" ng-show="containerCtrl.isSelected(1)" ng-cloak>
@@ -179,7 +201,7 @@
 										</div>
 										<div class="form-group">
 											<label for="inputPackage">Package</label>
-											<input type="file" accept=".zip,.mob" id="inputPackage" name="inputPackage" data-filename-placement="inside" required>
+											<input type="file" accept=".zip,.mob,.tab" id="inputPackage" name="inputPackage" data-filename-placement="inside" required>
 										</div>
 										<div class="form-group">
 											<label for="inputCaptures">Images</label>

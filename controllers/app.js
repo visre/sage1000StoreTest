@@ -12,14 +12,29 @@
 		}
 	});
 
-	app.controller('ContainerController', ['$scope', '$http', function($scope, $http){
+	app.filter('startFrom', function() {
+	    return function(input, start) {
+	        start = +start; //parse to int
+	        return input.slice(start);
+	    }
+	});
+
+	app.controller('ContainerController', ['$scope', '$http', '$window', function($scope, $http, $window){
 		this.tab = 0;	
 		$scope.resultInstall = "";
 		$scope.itemInstalled = "";
 		$scope.itemModified = "";	
+		$scope.currentPage = 0;
+			$scope.pageSize = 15;
+			$scope.numberOfPages=function(){
+	        return Math.ceil($scope.items.length/$scope.pageSize);                
+	    }
 		
 		this.selectTab = function(setTab){
-			this.tab = setTab;
+			if(this.tab !== setTab)
+				this.tab = setTab;
+			$window.scrollTo(0,0);
+
 		}
 		
 		this.isSelected = function(checkTab){
@@ -32,7 +47,6 @@
 
 			$http.get('/gallery/product/install?name=' + name + '&category=' + category).
 			success(function(data, status, headers, config){
-				alert(JSON.stringify(data));
 				$scope.resultInstall = data.Reason;
 			}).
 			error(function(data){
@@ -43,14 +57,14 @@
 
 		this.isAppExist = function(app){
 			var res = false;
-			angular.forEach($scope.items, function(key,value){
+			angular.forEach($scope.items, function(key, value){
 				angular.forEach(key.application, function(appKey, appValue){
-					if((appKey === app)&&(key.category === category))
+					if((appKey === app)&&(key.category === $scope.category))
 						res = true;
 				});
 			});
 			return res;
-		}
+		};
 
 		this.setItemModification = function(itemName){
 			this.selectTab(4);
@@ -58,7 +72,7 @@
 				if(item.name = itemName)
 					$scope.itemModified = item;
 			});
-		}
+		};
 	}]);
 	
 	app.controller('ItemController',['$scope', '$http', function($scope, $http){	
