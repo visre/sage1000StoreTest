@@ -139,22 +139,6 @@
   },
   {
     "type": "product",
-    "name": "Soldes de trésorerie",
-    "link": "soldesdetresorerie",
-    "description": "Soldes de trésorerie",
-    "price": 0,
-    "file": "soldesdetresorerie.jpg",
-    "package": "soldesdetresorerie.zip",
-    "category": "Dashboards",
-    "application": [
-      "treso"
-    ],
-    "captures": [],
-    "countView": 0,
-    "countOrder": 0
-  },
-  {
-    "type": "product",
     "name": "Répartitions des dotations",
     "link": "repartitionsdesdotations",
     "description": "Répartitions des dotations",
@@ -212,6 +196,54 @@
     "category": "Dashboards",
     "application": [
       "compta"
+    ],
+    "captures": [],
+    "countView": 0,
+    "countOrder": 0
+  },
+  {
+    "type": "product",
+    "name": "Soldes de trésorerie",
+    "link": "soldesdetresorerie",
+    "description": "Soldes de trésorerie",
+    "price": 0,
+    "file": "soldesdetresorerie.jpg",
+    "package": "soldesdetresorerie.zip",
+    "category": "Dashboards",
+    "application": [
+      "treso"
+    ],
+    "captures": [],
+    "countView": 0,
+    "countOrder": 0
+  },
+  {
+    "type": "product",
+    "name": "Remises envoyées",
+    "link": "remisesenvoyees",
+    "description": "Remise envoyées",
+    "price": 0,
+    "file": "remisesenvoyees.jpg",
+    "package": "remisesenvoyees.zip",
+    "category": "Dashboards",
+    "application": [
+      "paiement"
+    ],
+    "captures": [],
+    "countView": 0,
+    "countOrder": 0
+  },
+  {
+    "type": "product",
+    "name": "Top 10 des produits sur un an glissant",
+    "link": "top10desproduitssurunanglissant",
+    "description": "Top 10 des produits sur un an glissant",
+    "price": 0,
+    "file": "top10desproduitssurunanglissant.jpg",
+    "package": "top10desproduitssurunanglissant.zip",
+    "category": "Dashboards",
+    "application": [
+      "prop"
     ],
     "captures": [],
     "countView": 0,
